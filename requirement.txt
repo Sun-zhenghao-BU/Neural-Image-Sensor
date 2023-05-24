@@ -99,6 +99,7 @@ tensorflow-estimator==2.12.0
 tensorflow-io-gcs-filesystem==0.32.0
 termcolor==2.2.0
 torch==2.0.1
+torchsummary==1.5.1
 torchvision==0.15.2
 tqdm==4.62.3
 typing==3.7.4.3
