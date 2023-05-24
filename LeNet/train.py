@@ -3,15 +3,28 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
+from torchsummary import summary
 import torch.nn.functional as func
 import torch.optim as optim
 from model import LeNet
+
+
+def count_parameters(model):
+    total_params = 0
+    for name, param in model.named_parameters():
+        if param.requires_grad:
+            num_params = param.nelement()
+            print(f'Layer: {name} | Number of parameters: {num_params}')
+            total_params += num_params
+    print(f'Total number of parameters: {total_params}')
+
 
 Batch_size = 512
 Epoch = 20
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Model = LeNet()
 Optimizer = optim.Adam(Model.parameters())
+summary(Model, (1, 28, 28))
 
 train_loader = torch.utils.data.DataLoader(
     datasets.MNIST('data', train=True, download=True,
@@ -22,11 +35,10 @@ train_loader = torch.utils.data.DataLoader(
     batch_size=Batch_size, shuffle=True)
 
 test_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('data', train=True, download=True,
-                   transform=transforms.Compose([
-                       transforms.ToTensor(),
-                       transforms.Normalize((0.1037,), (0.3081,))
-                   ])),
+    datasets.MNIST('data', train=False, transform=transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1037,), (0.3081,))
+    ])),
     batch_size=Batch_size, shuffle=True)
 
 train_loss_arr = []
