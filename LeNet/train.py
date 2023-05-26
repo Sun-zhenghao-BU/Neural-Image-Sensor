@@ -57,7 +57,8 @@ for epoch in range(1, Epoch + 1):
         if (batch_idx + 1) % 30 == 0:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(train_loader.dataset),
-                       100. * batch_idx / len(train_loader), loss.item()))
+                100. * batch_idx / len(train_loader), loss.item()))
+
         elif batch_idx == 117:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, len(train_loader.dataset), len(train_loader.dataset),
