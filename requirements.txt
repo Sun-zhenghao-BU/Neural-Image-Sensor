@@ -1,0 +1,5 @@
+matplotlib==3.7.1
+numpy==1.22.0
+torch==2.0.1
+torchsummary==1.5.1
+torchvision==0.15.2
