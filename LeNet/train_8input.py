@@ -2,46 +2,41 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
-from torchsummary import summary
 import torch.nn.functional as func
 import torch.optim as optim
-from model import LeNet
-import random
+from model_8input import LeNet
+import h5py
+
+# Loading .mat file
+trainData = h5py.File('OTFData/TrainSet.mat', 'r')
+testData = h5py.File('OTFData/TestSet.mat', 'r')
+trainLabels = h5py.File('OTFData/TrainLabels.mat', 'r')
+testLabels = h5py.File('OTFData/TestLabels.mat', 'r')
+
+TrainSet = trainData['TrainSet'][:]
+TestSet = testData['TestSet'][:]
+TrainLabels = trainLabels['TrainLabels'][:]
+TestLabels = testLabels['TestLabels'][:]
+
+print("TrainSet shape:", TrainSet.shape)
+print("TrainLabels shape:", TrainLabels.shape)
+print("TestSet shape:", TestSet.shape)
+print("TestLabels shape:", TestLabels.shape)
 
 Batch_size = 512
 Epoch = 20
 Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# def replicate_padding(image):
-#     padded_image = func.pad(image, (2, 2, 2, 2), mode='replicate')
-#     return padded_image
+train_loader = torch.utils.data.DataLoader(
+    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),
+    batch_size=Batch_size,
+    shuffle=True)
 
-
-transform = transforms.Compose([
-    transforms.ToTensor(),
-    # transforms.Lambda(replicate_padding),
-    transforms.Normalize((0.1307,), (0.3081,))
-])
-
-train_dataset = datasets.MNIST('data', train=True, download=True, transform=transform)
-test_dataset = datasets.MNIST('data', train=False, transform=transform)
-
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=Batch_size, shuffle=True)
-test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=Batch_size, shuffle=True)
-
-# Select an image randomly
-random_index = random.randint(0, len(test_dataset) - 1)
-image, label = test_dataset[random_index]
-
-print("Image size:", image.shape)
-
-# Display the image
-plt.imshow(image.squeeze(), cmap='gray')
-plt.title(f"Label: {label}")
-plt.axis('off')
-plt.show()
+test_loader = torch.utils.data.DataLoader(
+    torch.utils.data.TensorDataset(torch.from_numpy(TestSet), torch.from_numpy(TestLabels.squeeze())),
+    batch_size=Batch_size,
+    shuffle=True)
 
 train_loss_runs = []
 test_loss_runs = []
@@ -49,17 +44,18 @@ accuracy_runs = []
 
 for run in range(Runs):
     print(f'Run: {run + 1}')
-    train_loss_arr = []
-    test_loss_arr = []
-    accuracy = []
     Model = LeNet()
     Model = Model.to(Device)
     Optimizer = optim.Adam(Model.parameters())
+    train_loss_arr = []
+    test_loss_arr = []
+    accuracy = []
 
     for epoch in range(1, Epoch + 1):
         Model.train()
         for batch_idx, (data, target) in enumerate(train_loader):
-            data, target = data.to(Device), target.to(Device)
+            data = data.to(Device).float()
+            target = target.to(Device).long()
             Optimizer.zero_grad()
             output = Model(data)
             loss = func.nll_loss(output, target)
@@ -69,7 +65,7 @@ for run in range(Runs):
             if (batch_idx + 1) % 30 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
-                           100. * batch_idx / len(train_loader), loss.item()))
+                    100. * batch_idx / len(train_loader), loss.item()))
 
             elif batch_idx == 117:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
@@ -82,7 +78,8 @@ for run in range(Runs):
         correct = 0
         with torch.no_grad():
             for data, target in test_loader:
-                data, target = data.to(Device), target.to(Device)
+                data = data.to(Device).float()
+                target = target.to(Device).long()
                 output = Model(data)
                 test_loss += func.nll_loss(output, target, reduction='sum').item()
                 pred = output.max(1, keepdim=True)[1]

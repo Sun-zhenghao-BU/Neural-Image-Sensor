@@ -1,6 +1,5 @@
 import os
 import random
-import shutil
 from torchvision import datasets
 
 # 设置随机种子
@@ -10,7 +9,7 @@ random.seed(1234)
 mnist_dataset = datasets.MNIST('data', train=True, download=True)
 mnist_list = list(mnist_dataset)
 # 随机选择 100 张图片
-random_samples = random.sample(mnist_list, 100)
+random_samples = random.sample(mnist_list, 10)
 
 # 创建保存图片的文件夹
 output_folder = 'random_images'
