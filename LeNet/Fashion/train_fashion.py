@@ -29,23 +29,29 @@ data_path = '../data'
 
 # Loading Dataset
 train_dataset = datasets.FashionMNIST(root=data_path, train=True, download=True, transform=transform)
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=Batch_size, shuffle=True)
 
 test_dataset = datasets.FashionMNIST(root=data_path, train=False, download=True, transform=transform)
-test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=64, shuffle=False)
+test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=Batch_size, shuffle=True)
 
 # Instantiation
 model = LeNet()
 
 # Define the optimizer and loss function
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.75)
 
 # Select an image randomly
 random_index = random.randint(0, len(test_dataset) - 1)
 image, label = test_dataset[random_index]
 
 print("Image size:", image.shape)
+
+# Display the image
+plt.imshow(image.squeeze(), cmap='gray')
+plt.title(f"Label: {label}")
+plt.axis('off')
+plt.show()
 
 train_loss_arr = []
 test_loss_arr = []

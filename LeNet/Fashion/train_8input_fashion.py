@@ -8,10 +8,10 @@ from LeNet.model_8input import LeNet
 import h5py
 
 # Loading .mat file
-trainData = h5py.File('OTFData/MNIST/TrainSet.mat', 'r')
-testData = h5py.File('OTFData/MNIST/TestSet.mat', 'r')
-trainLabels = h5py.File('OTFData/MNIST/TrainLabels.mat', 'r')
-testLabels = h5py.File('OTFData/MNIST/TestLabels.mat', 'r')
+trainData = h5py.File('OTFData/Fashion/FashionTrainSet.mat', 'r')
+testData = h5py.File('OTFData/Fashion/FashionTestSet.mat', 'r')
+trainLabels = h5py.File('OTFData/Fashion/FashionTrainLabels.mat', 'r')
+testLabels = h5py.File('OTFData/Fashion/FashionTestLabels.mat', 'r')
 
 TrainSet = trainData['TrainSet'][:]
 TestSet = testData['TestSet'][:]
