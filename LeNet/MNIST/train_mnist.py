@@ -6,69 +6,13 @@ from torchvision import datasets, transforms
 from torchsummary import summary
 import torch.nn.functional as func
 import torch.optim as optim
-from model import LeNet
+from LeNet.model import LeNet
 import random
-<<<<<<< HEAD
-=======
-
-
-def count_parameters(model):
-    total_params = 0
-    for name, param in model.named_parameters():
-        if param.requires_grad:
-            num_params = param.nelement()
-            print(f'Layer: {name} | Number of parameters: {num_params}')
-            total_params += num_params
-    print(f'Total number of parameters: {total_params}')
-
->>>>>>> e29b96fe2b087cab7afdc6c407c18aa209b19c14
 
 Batch_size = 512
 Epoch = 20
 Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-<<<<<<< HEAD
-
-# def replicate_padding(image):
-#     padded_image = func.pad(image, (2, 2, 2, 2), mode='replicate')
-#     return padded_image
-
-=======
-Model = LeNet()
-Model = Model.to(Device)
-Optimizer = optim.Adam(Model.parameters())
-summary(Model, (1, 32, 32))
-
-
-def symmetric_padding(image):
-    padded_image = func.pad(image, (2, 2, 2, 2), mode='reflect')
-    return padded_image
-
-
-transform = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Lambda(symmetric_padding),
-    transforms.Normalize((0.1307,), (0.3081,))
-])
-
-train_dataset = datasets.MNIST('data', train=True, download=True, transform=transform)
-test_dataset = datasets.MNIST('data', train=False, transform=transform)
-
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=Batch_size, shuffle=True)
-test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=Batch_size, shuffle=True)
-
-# Select an image randomly
-random_index = random.randint(0, len(test_dataset) - 1)
-image, label = test_dataset[random_index]
-
-print("Image size:", image.shape)
-
-# Display the image
-# plt.imshow(image.squeeze(), cmap='gray')
-# plt.title(f"Label: {label}")
-# plt.axis('off')
-# plt.show()
->>>>>>> e29b96fe2b087cab7afdc6c407c18aa209b19c14
 
 transform = transforms.Compose([
     transforms.ToTensor(),
@@ -88,11 +32,11 @@ image, label = test_dataset[random_index]
 
 print("Image size:", image.shape)
 
-# Display the image
-plt.imshow(image.squeeze(), cmap='gray')
-plt.title(f"Label: {label}")
-plt.axis('off')
-plt.show()
+# # Display the image
+# plt.imshow(image.squeeze(), cmap='gray')
+# plt.title(f"Label: {label}")
+# plt.axis('off')
+# plt.show()
 
 train_loss_runs = []
 test_loss_runs = []
@@ -120,7 +64,7 @@ for run in range(Runs):
             if (batch_idx + 1) % 30 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
-                           100. * batch_idx / len(train_loader), loss.item()))
+                    100. * batch_idx / len(train_loader), loss.item()))
 
             elif batch_idx == 117:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(

@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import DataLoader
 import torch.nn.functional as func
 import torch.optim as optim
-from model_8input import LeNet
+from LeNet.model_8input import LeNet
 import h5py
 
 # Loading .mat file
