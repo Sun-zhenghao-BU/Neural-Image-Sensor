@@ -3,7 +3,6 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
-from torchsummary import summary
 import torch.nn.functional as func
 import torch.optim as optim
 from LeNet.model import LeNet
@@ -16,7 +15,6 @@ Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 transform = transforms.Compose([
     transforms.ToTensor(),
-    # transforms.Lambda(replicate_padding),
     transforms.Normalize((0.1307,), (0.3081,))
 ])
 

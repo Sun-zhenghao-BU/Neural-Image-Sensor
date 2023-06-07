@@ -1,11 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+import pandas as pd
+import torch.nn as nn
 from torch.utils.data import DataLoader
-import torch.nn.functional as func
 import torch.optim as optim
 from LeNet.model_8input import LeNet
 import h5py
+import time
 
 # Loading .mat file
 trainData = h5py.File('OTFData/Fashion/FashionTrainSet.mat', 'r')
@@ -41,14 +43,17 @@ test_loader = torch.utils.data.DataLoader(
 train_loss_runs = []
 test_loss_runs = []
 accuracy_runs = []
+test_time_runs = []
 
 for run in range(Runs):
     print(f'Run: {run + 1}')
     Model = LeNet()
     Model = Model.to(Device)
-    Optimizer = optim.Adam(Model.parameters())
+    criterion = nn.CrossEntropyLoss()
+    Optimizer = optim.Adam(Model.parameters(), lr=0.003)
     train_loss_arr = []
     test_loss_arr = []
+    test_time_arr = []
     accuracy = []
 
     for epoch in range(1, Epoch + 1):
@@ -58,7 +63,7 @@ for run in range(Runs):
             target = target.to(Device).long()
             Optimizer.zero_grad()
             output = Model(data)
-            loss = func.nll_loss(output, target)
+            loss = criterion(output, target)
             loss.backward()
             Optimizer.step()
 
@@ -74,6 +79,7 @@ for run in range(Runs):
                 train_loss_arr.append(loss.item())
 
         Model.eval()
+        start_time = time.time()
         test_loss = 0
         correct = 0
         with torch.no_grad():
@@ -81,17 +87,20 @@ for run in range(Runs):
                 data = data.to(Device).float()
                 target = target.to(Device).long()
                 output = Model(data)
-                test_loss += func.nll_loss(output, target, reduction='sum').item()
+                test_loss += criterion(output, target).item() * data.size(0)
                 pred = output.max(1, keepdim=True)[1]
                 correct += pred.eq(target.view_as(pred)).sum().item()
 
+        test_time = time.time() - start_time
         test_loss /= len(test_loader.dataset)
         test_loss_arr.append(test_loss)
         accuracy.append(100. * correct / len(test_loader.dataset))
+        test_time_arr.append(test_time)
         print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.3f}%)\n'.format(
             test_loss, correct, len(test_loader.dataset),
             100. * correct / len(test_loader.dataset)))
 
+    test_time_runs.append(test_time_arr)
     train_loss_runs.append(train_loss_arr)
     test_loss_runs.append(test_loss_arr)
     accuracy_runs.append(accuracy)
@@ -99,6 +108,7 @@ for run in range(Runs):
 avg_train_loss = np.mean(train_loss_runs, axis=0)
 avg_test_loss = np.mean(test_loss_runs, axis=0)
 avg_accuracy = np.mean(accuracy_runs, axis=0)
+avg_test_time = np.mean(test_time_runs, axis=1)
 
 fig1, ax1 = plt.subplots()
 ax1.plot(avg_accuracy, color='red', linewidth=1, linestyle='solid', label='Accuracy')
@@ -128,3 +138,12 @@ ax2.set_ylabel('Loss Value')
 ax2.set_xticks(epochs)
 
 plt.show()
+
+# Display the results table
+results_table = pd.DataFrame({
+    'Run': np.arange(1, Runs + 1),
+    'Test Accuracy': [f'{acc:.2f}%' for acc in avg_accuracy],
+    'Test Loss': avg_test_loss,
+    'Test Time (s)': avg_test_time
+})
+print(results_table)

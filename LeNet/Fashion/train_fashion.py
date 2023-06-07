@@ -1,12 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import torchvision
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from torchsummary import summary
-import torch.nn.functional as func
 import torch.optim as optim
 from LeNet.model import LeNet
 import random
@@ -16,7 +14,6 @@ Epoch = 20
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Model = LeNet()
 Model = Model.to(Device)
-Optimizer = optim.Adam(Model.parameters())
 summary(Model, (1, 28, 28))
 
 # Define Data transfer
@@ -34,12 +31,9 @@ train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=Batch_size,
 test_dataset = datasets.FashionMNIST(root=data_path, train=False, download=True, transform=transform)
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=Batch_size, shuffle=True)
 
-# Instantiation
-model = LeNet()
-
 # Define the optimizer and loss function
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.75)
+Optimizer = optim.Adam(Model.parameters(), lr=0.003)
 
 # Select an image randomly
 random_index = random.randint(0, len(test_dataset) - 1)
@@ -64,7 +58,7 @@ for epoch in range(1, Epoch + 1):
         data, target = data.to(Device), target.to(Device)
         Optimizer.zero_grad()
         output = Model(data)
-        loss = func.nll_loss(output, target)
+        loss = criterion(output, target)
         loss.backward()
         Optimizer.step()
 
@@ -86,7 +80,7 @@ for epoch in range(1, Epoch + 1):
         for data, target in test_loader:
             data, target = data.to(Device), target.to(Device)
             output = Model(data)
-            test_loss += func.nll_loss(output, target, reduction='sum').item()
+            test_loss += criterion(output, target).item() * data.size(0)
             pred = output.max(1, keepdim=True)[1]
             correct += pred.eq(target.view_as(pred)).sum().item()
 

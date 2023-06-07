@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c786e6bc-e2d5-48af-aca6-4db818760f17" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/LeNet/Fashion/train_8input_fashion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/train_8input_fashion.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Fashion/train_8input_fashion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeNet/Fashion/train_fashion.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Fashion/train_fashion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeNet/MNIST/train_8input_mnist.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/MNIST/train_8input_mnist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/train_mnist.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/MNIST/train_mnist.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,13 +43,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LeNet/OTFData/Fashion" />
       <recent name="$PROJECT_DIR$/LeNet/OTFData/MNIST" />
       <recent name="$PROJECT_DIR$/LeNet" />
       <recent name="$PROJECT_DIR$/LeNet/MNIST" />
       <recent name="$PROJECT_DIR$/LeNet/OTFData" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.train_8input_fashion">
+  <component name="RunManager" selected="Python.train_8input_mnist">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Coding" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -213,8 +215,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.train_8input_fashion" />
         <item itemvalue="Python.train_8input_mnist" />
+        <item itemvalue="Python.train_8input_fashion" />
         <item itemvalue="Python.train_fashion" />
         <item itemvalue="Python.train_mnist" />
         <item itemvalue="Python.model_8input" />
@@ -237,7 +239,10 @@
       <workItem from="1685586993472" duration="193000" />
       <workItem from="1685657002370" duration="11672000" />
       <workItem from="1685711942646" duration="9683000" />
-      <workItem from="1685721929623" duration="582000" />
+      <workItem from="1685721929623" duration="4600000" />
+      <workItem from="1685969242648" duration="1001000" />
+      <workItem from="1685998111430" duration="4882000" />
+      <workItem from="1686080508279" duration="12837000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1685109392811</created>
@@ -272,14 +277,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Coding$train_fashion.coverage" NAME="train_fashion Coverage Results" MODIFIED="1685718744770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
-    <SUITE FILE_PATH="coverage/Coding$train_8input_fashion.coverage" NAME="train_8input_fashion Coverage Results" MODIFIED="1685722483019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_mnist.coverage" NAME="train_mnist Coverage Results" MODIFIED="1686085467148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
+    <SUITE FILE_PATH="coverage/Coding$train_fashion.coverage" NAME="train_fashion Coverage Results" MODIFIED="1686086231860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_8input_fashion.coverage" NAME="train_8input_fashion Coverage Results" MODIFIED="1686087534276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
     <SUITE FILE_PATH="coverage/Coding$train_8input.coverage" NAME="train_8input Coverage Results" MODIFIED="1685659442449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$train.coverage" NAME="train_mnist Coverage Results" MODIFIED="1685716609901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$Generate100.coverage" NAME="Generate100 Coverage Results" MODIFIED="1685109138769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$model.coverage" NAME="model Coverage Results" MODIFIED="1684596754998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$model_8input.coverage" NAME="model_8input Coverage Results" MODIFIED="1685504762159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
-    <SUITE FILE_PATH="coverage/Coding$train_8input_mnist.coverage" NAME="train_8input_mnist Coverage Results" MODIFIED="1685722334988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
+    <SUITE FILE_PATH="coverage/Coding$train_8input_mnist.coverage" NAME="train_8input_mnist Coverage Results" MODIFIED="1686098982030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$LoadingMat.coverage" NAME="LoadingMat Coverage Results" MODIFIED="1685501031628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
   </component>
 </project>
