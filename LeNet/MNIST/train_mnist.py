@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 import torch.nn.functional as func
 import torch.optim as optim
-from LeNet.model import LeNet
+from model import LeNet
 import random
 
 Batch_size = 512

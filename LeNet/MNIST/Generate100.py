@@ -6,7 +6,7 @@ from torchvision import datasets
 random.seed(1234)
 
 # 加载 MNIST 数据集
-mnist_dataset = datasets.MNIST('data', train=True, download=True)
+mnist_dataset = datasets.FashionMNIST('data', train=True, download=True)
 mnist_list = list(mnist_dataset)
 # 随机选择 100 张图片
 random_samples = random.sample(mnist_list, 10)
