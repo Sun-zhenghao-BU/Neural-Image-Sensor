@@ -9,7 +9,6 @@ from model_8input import LeNet
 import torch.nn.init as init
 import h5py
 import time
-from fvcore.nn import FlopCountAnalysis
 
 
 def train_model(train_loader, test_loader, device, Model, criterion, optimizer, num_epochs, num_Runs):
@@ -88,7 +87,7 @@ def train_model(train_loader, test_loader, device, Model, criterion, optimizer, 
     return avg_train_loss, avg_test_loss, avg_accuracy, avg_test_time
 
 
-def plot_results(avg_accuracy, avg_train_loss, avg_test_loss):
+def plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, Runs):
     fig1, ax1 = plt.subplots()
     ax1.plot(np.arange(1, len(avg_accuracy) + 1), avg_accuracy, color='red', linewidth=1, linestyle='solid',
              label='Accuracy')
@@ -116,11 +115,6 @@ def plot_results(avg_accuracy, avg_train_loss, avg_test_loss):
     ax2.set_ylabel('Loss Value')
     ax2.set_xticks(epochs)
 
-    plt.show()
-
-
-# Display the results table
-def plot_time(avg_test_time, Runs):
     results_table = pd.DataFrame({
         'Run': np.arange(1, Runs + 1),
         'Test Time (s)': avg_test_time
@@ -128,18 +122,18 @@ def plot_time(avg_test_time, Runs):
 
     print(results_table)
     avg = np.mean(avg_test_time)
+
     print(avg)
 
+    plt.show()
 
-def cal_ops(model, input):
-    f1 = FlopCountAnalysis(model, input)
-    print(f1.total())
 
 def reset_weights(m):
     if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
         init.xavier_uniform_(m.weight)
         if m.bias is not None:
             init.zeros_(m.bias)
+
 
 def main():
     # Loading .mat file
@@ -182,8 +176,8 @@ def main():
     avg_train_loss, avg_test_loss, avg_accuracy, avg_test_time = train_model(
         train_loader, test_loader, device, Model, criterion, Optimizer, Epoch, Runs)
 
-    plot_results(avg_accuracy, avg_train_loss, avg_test_loss)
-    plot_time(avg_test_time, Runs)
+    plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, Runs)
+    # plot_time(avg_test_time, Runs)
 
 
 if __name__ == '__main__':

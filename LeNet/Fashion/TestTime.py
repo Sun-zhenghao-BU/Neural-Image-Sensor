@@ -1,53 +1,38 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
-import pandas as pd
 from torch.utils.data import DataLoader
 import torch.optim as optim
-from model import LeNet
-import h5py
+from torchvision.datasets import FashionMNIST
+from torchvision.transforms import ToTensor
 import time
+from model import LeNet
 
-# Loading .mat file
-trainData = h5py.File('../OTFData/Fashion/FashionOriginalTrainSet.mat', 'r')
-testData = h5py.File('../OTFData/Fashion/FashionOriginalTestSet.mat', 'r')
-trainLabels = h5py.File('../OTFData/Fashion/FashionTrainLabels.mat', 'r')
-testLabels = h5py.File('../OTFData/Fashion/FashionTestLabels.mat', 'r')
+# Set random seed for reproducibility
+torch.manual_seed(42)
+np.random.seed(42)
 
-TrainSet = trainData['TrainImages'][:]
-TestSet = testData['TestImages'][:]
-TrainLabels = trainLabels['TrainLabels'][:]
-TestLabels = testLabels['TestLabels'][:]
+# Load FashionMNIST dataset
+train_dataset = FashionMNIST(root='./data', train=True, download=True, transform=ToTensor())
+test_dataset = FashionMNIST(root='./data', train=False, download=True, transform=ToTensor())
 
-print("TrainSet shape:", TrainSet.shape)
-print("TrainLabels shape:", TrainLabels.shape)
-print("TestSet shape:", TestSet.shape)
-print("TestLabels shape:", TestLabels.shape)
+# Define data loaders
+train_loader = DataLoader(train_dataset, batch_size=512, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=512, shuffle=False)
 
+# Train the model
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("Device:", device)
+
+Epoch = 20
+Runs = 10
 train_loss_runs = []
 test_loss_runs = []
 accuracy_runs = []
 test_time_runs = []
 
-Batch_size = 512
-Epoch = 20
-Runs = 10
-Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print("Device:", Device)
-
-train_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TrainLabels.squeeze())),
-    batch_size=Batch_size,
-    shuffle=True)
-
-test_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TestSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TestLabels.squeeze())),
-    batch_size=Batch_size,
-    shuffle=True)
-
-
-# Train the model
 for run in range(Runs):
     print(f'Run: {run + 1}')
     train_loss_arr = []
@@ -55,17 +40,17 @@ for run in range(Runs):
     test_time_arr = []
     accuracy = []
     Model = LeNet()
-    Model = Model.to(Device)
+    Model = Model.to(device)
     # Define the optimizer and loss function
     criterion = nn.CrossEntropyLoss()
     Optimizer = optim.Adam(Model.parameters(), lr=0.001)
 
-    for epoch in range(1, Epoch + 1):
+    for epoch in range(1, Epoch):
         Model.train()
         for batch_idx, (data, target) in enumerate(train_loader):
             # data = data.to(Device).float()
-            data = data.to(Device).type(torch.float32)
-            target = target.to(Device).long()
+            data = data.to(device).type(torch.float32)
+            target = target.to(device).long()
             Optimizer.zero_grad()
             output = Model(data)
             loss = criterion(output, target)
@@ -89,8 +74,9 @@ for run in range(Runs):
         with torch.no_grad():
             test_elapsed_time = []
             for data, target in test_loader:
-                data = data.to(Device).float()
-                target = target.to(Device).long()
+
+                data = data.to(device).float()
+                target = target.to(device).float()
                 print(data.type())
 
                 start_time = time.time()

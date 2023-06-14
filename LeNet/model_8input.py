@@ -35,3 +35,10 @@ class LeNet(nn.Module):
         x = func.log_softmax(x, dim=1)
 
         return x
+
+
+model = LeNet()
+
+for name, param in model.named_parameters():
+    if 'bias' in name:
+        print(f'Layer: {name} has bias')
