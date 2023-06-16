@@ -91,7 +91,6 @@ for run in range(Runs):
             for data, target in test_loader:
                 data = data.to(Device).float()
                 target = target.to(Device).long()
-                print(data.type())
 
                 start_time = time.time()
                 output = Model(data)
@@ -122,6 +121,8 @@ avg_test_loss = np.mean(test_loss_runs, axis=0)
 avg_accuracy = np.mean(accuracy_runs, axis=0)
 avg_test_time = np.mean(test_time_runs, axis=1)
 
+var_accuracy = np.var(accuracy_runs, axis=0)
+
 fig1, ax1 = plt.subplots()
 ax1.plot(np.arange(1, len(avg_accuracy) + 1), avg_accuracy, color='red', linewidth=1, linestyle='solid',
          label='Accuracy')
@@ -149,6 +150,17 @@ ax2.set_title('Loss Value of Train dataset and Test dataset')
 ax2.set_xlabel('Epochs')
 ax2.set_ylabel('Loss Value')
 ax2.set_xticks(epochs)
+
+fig3, ax3 = plt.subplots()
+ax3.plot(np.arange(1, len(var_accuracy) + 1), var_accuracy, color='blue', linewidth=1, linestyle='solid')
+ax3.set_title('Variance of Accuracy across Runs')
+ax3.set_xlabel('Epochs')
+ax3.set_ylabel('Variance')
+ax3.set_xticks(epochs)
+
+for epoch, var in enumerate(var_accuracy):
+    ax3.annotate(f'Var: {var:.2f}', xy=(epoch+1, var), xytext=(epoch+1, var + 0.02),
+                 ha='center', va='bottom')
 
 # Display the results table
 print(len(avg_test_time))

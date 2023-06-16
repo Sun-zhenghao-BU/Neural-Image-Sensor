@@ -4,6 +4,8 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
 import torch.optim as optim
 from model_8input import LeNet
 import torch.nn.init as init
@@ -16,6 +18,7 @@ def train_model(train_loader, test_loader, device, Model, criterion, optimizer, 
     test_loss_runs = []
     accuracy_runs = []
     test_time_runs = []
+    last_epoch_accuracy = []
 
     for run in range(num_Runs):
         print(f'Run: {run + 1}')
@@ -74,6 +77,9 @@ def train_model(train_loader, test_loader, device, Model, criterion, optimizer, 
                 test_loss, correct, len(test_loader.dataset),
                 100. * correct / len(test_loader.dataset)))
 
+            if epoch == num_epochs:
+                last_epoch_accuracy.append(accuracy[-1])
+
         test_time_runs.append(test_time_arr)
         train_loss_runs.append(train_loss_arr)
         test_loss_runs.append(test_loss_arr)
@@ -84,10 +90,12 @@ def train_model(train_loader, test_loader, device, Model, criterion, optimizer, 
     avg_accuracy = np.mean(accuracy_runs, axis=0)
     avg_test_time = np.mean(test_time_runs, axis=1)
 
-    return avg_train_loss, avg_test_loss, avg_accuracy, avg_test_time
+    var_accuracy = np.var(accuracy_runs, axis=0)
+
+    return avg_train_loss, avg_test_loss, avg_accuracy, avg_test_time, var_accuracy
 
 
-def plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, Runs):
+def plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, var_accuracy, Runs, cm):
     fig1, ax1 = plt.subplots()
     ax1.plot(np.arange(1, len(avg_accuracy) + 1), avg_accuracy, color='red', linewidth=1, linestyle='solid',
              label='Accuracy')
@@ -115,6 +123,17 @@ def plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, Run
     ax2.set_ylabel('Loss Value')
     ax2.set_xticks(epochs)
 
+    fig3, ax3 = plt.subplots()
+    ax3.plot(np.arange(1, len(var_accuracy) + 1), var_accuracy, color='blue', linewidth=1, linestyle='solid')
+    ax3.set_title('Variance of Accuracy across Runs')
+    ax3.set_xlabel('Epochs')
+    ax3.set_ylabel('Variance')
+    ax3.set_xticks(epochs)
+
+    for epoch, var in enumerate(var_accuracy):
+        ax3.annotate(f'Var: {var:.2f}', xy=(epoch + 1, var), xytext=(epoch + 1, var + 0.02),
+                     ha='center', va='bottom')
+
     results_table = pd.DataFrame({
         'Run': np.arange(1, Runs + 1),
         'Test Time (s)': avg_test_time
@@ -124,6 +143,12 @@ def plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, Run
     avg = np.mean(avg_test_time)
 
     print(avg)
+
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
+    plt.title("Confusion Matrix - Test Set")
+    plt.xlabel("Predicted Labels")
+    plt.ylabel("True Labels")
 
     plt.show()
 
@@ -156,8 +181,8 @@ def main():
     print("Device:", device)
 
     Batch_size = 512
-    Epoch = 20
-    Runs = 10
+    Epoch = 2
+    Runs = 1
     Model = LeNet()
     Model = Model.to(device)
     criterion = nn.CrossEntropyLoss()
@@ -173,12 +198,25 @@ def main():
         batch_size=Batch_size,
         shuffle=True)
 
-    avg_train_loss, avg_test_loss, avg_accuracy, avg_test_time = train_model(
+    avg_train_loss, avg_test_loss, avg_accuracy, avg_test_time, var_accuracy = train_model(
         train_loader, test_loader, device, Model, criterion, Optimizer, Epoch, Runs)
 
-    plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, Runs)
-    # plot_time(avg_test_time, Runs)
+    # Generate confusion matrix for the test set
+    y_true = np.array([])
+    y_pred = np.array([])
+    Model.eval()
+    with torch.no_grad():
+        for data, target in test_loader:
+            data = data.to(device).float()
+            target = target.to(device).long()
+            output = Model(data)
+            pred = output.argmax(dim=1)
+            y_true = np.append(y_true, target.cpu().numpy())
+            y_pred = np.append(y_pred, pred.cpu().numpy())
 
+    cm = confusion_matrix(y_true, y_pred)
+
+    plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, var_accuracy, Runs, cm)
 
 if __name__ == '__main__':
     main()
