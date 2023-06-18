@@ -18,8 +18,10 @@ transform = transforms.Compose([
     transforms.Normalize((0.1307,), (0.3081,))
 ])
 
-train_dataset = datasets.MNIST('data', train=True, download=True, transform=transform)
-test_dataset = datasets.MNIST('data', train=False, transform=transform)
+path = '../data'
+
+train_dataset = datasets.MNIST(path, train=True, download=True, transform=transform)
+test_dataset = datasets.MNIST(path, train=False, transform=transform)
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=Batch_size, shuffle=True)
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=Batch_size, shuffle=True)
@@ -29,12 +31,6 @@ random_index = random.randint(0, len(test_dataset) - 1)
 image, label = test_dataset[random_index]
 
 print("Image size:", image.shape)
-
-# # Display the image
-# plt.imshow(image.squeeze(), cmap='gray')
-# plt.title(f"Label: {label}")
-# plt.axis('off')
-# plt.show()
 
 train_loss_runs = []
 test_loss_runs = []

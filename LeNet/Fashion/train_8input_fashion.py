@@ -218,5 +218,6 @@ def main():
 
     plot_results(avg_accuracy, avg_train_loss, avg_test_loss, avg_test_time, var_accuracy, Runs, cm)
 
+
 if __name__ == '__main__':
     main()
