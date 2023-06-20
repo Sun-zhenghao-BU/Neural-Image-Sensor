@@ -5,9 +5,11 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 import torch.nn.functional as func
 import torch.optim as optim
-from model3 import LeNet
 import random
 import ssl
+import sys
+sys.path.append("../Model")
+from model3 import LeNet
 
 Batch_size = 512
 Epoch = 2
