@@ -4,14 +4,16 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from torchsummary import summary
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 import torch.optim as optim
-from model_8input import LeNet
 import torch.nn.init as init
 import h5py
 import time
-
+import sys
+sys.path.append("../Model")
+from model_8input import LeNet
 
 def train_model(train_loader, test_loader, device, Model, criterion, optimizer, num_epochs, num_Runs):
     train_loss_runs = []
@@ -185,6 +187,7 @@ def main():
     Runs = 1
     Model = LeNet()
     Model = Model.to(device)
+    summary(Model, input_size=(8, 28, 28))
     criterion = nn.CrossEntropyLoss()
     Optimizer = optim.Adam(Model.parameters(), lr=0.001)
 

@@ -1,9 +1,7 @@
 import torch
 from torchsummary import summary
 from thop import profile
-from model_8input import LeNet
-from fvcore.nn import FlopCountAnalysis
-from torchstat import stat
+from LeNet.Model.model_8input import LeNet
 
 # Define the model
 model = LeNet()

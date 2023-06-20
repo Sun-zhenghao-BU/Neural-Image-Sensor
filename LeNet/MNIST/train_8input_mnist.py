@@ -5,9 +5,11 @@ import pandas as pd
 import torch.nn as nn
 from torch.utils.data import DataLoader
 import torch.optim as optim
-from model_8input import LeNet
 import h5py
 import time
+import sys
+sys.path.append("../Model")
+from model_8input import LeNet
 
 # Loading .mat file
 trainData = h5py.File('../OTFData/MNIST/TrainSet.mat', 'r')
