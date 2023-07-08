@@ -10,16 +10,16 @@ import h5py
 import time
 import sys
 sys.path.append("../Model")
-from model_ONN import LeNet
+from model_Cut import LeNet
 
 # Loading .mat file
-trainData = h5py.File('../OTFData/Fashion/FashionTrainSet.mat', 'r')
-testData = h5py.File('../OTFData/Fashion/FashionTestSet.mat', 'r')
+trainData = h5py.File('../OTFData/Fashion/FashionOriginalTrainSet.mat', 'r')
+testData = h5py.File('../OTFData/Fashion/FashionOriginalTestSet.mat', 'r')
 trainLabels = h5py.File('../OTFData/Fashion/FashionTrainLabels.mat', 'r')
 testLabels = h5py.File('../OTFData/Fashion/FashionTestLabels.mat', 'r')
 
-TrainSet = trainData['TrainSet'][:]
-TestSet = testData['TestSet'][:]
+TrainSet = trainData['TrainImages'][:]
+TestSet = testData['TestImages'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
 TestLabels = testLabels['TestLabels'][:]
 
@@ -39,18 +39,19 @@ Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Model = LeNet()
 Model = Model.to(Device)
-summary(Model, input_size=(8, 28, 28))
+summary(Model, input_size=(1, 28, 28))
 print("Device:", Device)
 
 train_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),
+    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TrainLabels.squeeze())),
     batch_size=Batch_size,
     shuffle=True)
 
 test_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TestSet), torch.from_numpy(TestLabels.squeeze())),
+    torch.utils.data.TensorDataset(torch.from_numpy(TestSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TestLabels.squeeze())),
     batch_size=Batch_size,
     shuffle=True)
+
 
 # Train the model
 for run in range(Runs):
@@ -80,7 +81,7 @@ for run in range(Runs):
             if (batch_idx + 1) % 30 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
-                           100. * batch_idx / len(train_loader), loss.item()))
+                    100. * batch_idx / len(train_loader), loss.item()))
 
             elif batch_idx == 117:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
@@ -164,7 +165,7 @@ ax3.set_ylabel('Variance')
 ax3.set_xticks(epochs)
 
 for epoch, var in enumerate(var_accuracy):
-    ax3.annotate(f'Var: {var:.2f}', xy=(epoch + 1, var), xytext=(epoch + 1, var + 0.02),
+    ax3.annotate(f'Var: {var:.2f}', xy=(epoch+1, var), xytext=(epoch+1, var + 0.02),
                  ha='center', va='bottom')
 
 # Display the results table
