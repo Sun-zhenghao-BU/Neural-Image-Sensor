@@ -14,7 +14,7 @@ import time
 import sys
 
 sys.path.append("../Model")
-from model_8_input import LeNet
+from model_BW_OTF import LeNet
 
 # def train_model(train_loader, test_loader, device, Model, criterion, optimizer, num_epochs, num_Runs):
 #     train_loss_runs = []
@@ -239,7 +239,7 @@ import time
 import sys
 
 sys.path.append("../Model")
-from model_8_input import LeNet
+from model_BW_OTF import LeNet
 
 # Loading .mat file
 trainData = h5py.File('../OTFData/Fashion/FashionTrainSet.mat', 'r')

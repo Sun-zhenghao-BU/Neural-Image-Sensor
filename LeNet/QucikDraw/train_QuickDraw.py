@@ -10,7 +10,7 @@ import torch.optim as optim
 import time
 import sys
 sys.path.append("../Model")
-from model_ONN import LeNet
+from model_BW_ONN import LeNet
 
 # Load the dataset
 train_data = np.load("../data/QuickDraw/train_data.npy")

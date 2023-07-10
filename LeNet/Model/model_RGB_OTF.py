@@ -19,7 +19,7 @@ class LeNet(nn.Module):
         self.bn1 = nn.BatchNorm2d(24)
         self.bn2 = nn.BatchNorm2d(48)
         # Define full connection layers size
-        self.fc1 = nn.Linear(48 * 5 * 5, 120)
+        self.fc1 = nn.Linear(48 * 6 * 6, 120)
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 10)
 

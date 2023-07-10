@@ -10,7 +10,7 @@ import h5py
 import time
 import sys
 sys.path.append("../Model")
-from model_Cut import LeNet
+from model_BW_Cut import LeNet
 
 # Loading .mat file
 trainData = h5py.File('../OTFData/Fashion/FashionOriginalTrainSet.mat', 'r')

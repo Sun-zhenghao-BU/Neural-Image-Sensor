@@ -8,7 +8,7 @@ import torch.optim as optim
 from torchvision.datasets import FashionMNIST
 from torchvision.transforms import ToTensor
 import time
-from model import LeNet
+from model_BW import LeNet
 
 # Set random seed for reproducibility
 torch.manual_seed(42)

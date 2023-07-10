@@ -8,7 +8,7 @@ import torch.optim as optim
 import random
 import sys
 sys.path.append("../Model")
-from model import LeNet
+from model_BW import LeNet
 
 
 Batch_size = 512
