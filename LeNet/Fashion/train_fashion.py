@@ -5,7 +5,6 @@ import torch.nn as nn
 import pandas as pd
 from torch.utils.data import DataLoader
 import torch.optim as optim
-from model import LeNet
 import h5py
 import time
 import sys
@@ -37,7 +36,10 @@ Batch_size = 512
 Epoch = 20
 Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print("Device:", Device)
+if Device.type == 'cuda':
+    print("Using CUDA for computation")
+else:
+    print("Using CPU for computation")
 
 train_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TrainSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TrainLabels.squeeze())),
@@ -95,10 +97,27 @@ for run in range(Runs):
                 data = data.to(Device).float()
                 target = target.to(Device).long()
 
-                start_time = time.time()
-                output = Model(data)
-                pred = output.max(1, keepdim=True)[1]
-                test_batch_time = time.time() - start_time
+                if torch.cuda.is_available():
+                    # Use CUDA event for timing if CUDA is available
+                    start_time = torch.cuda.Event(enable_timing=True)
+                    end_time = torch.cuda.Event(enable_timing=True)
+
+                    start_time.record()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    end_time.record()
+
+                    # Waits for everything to finish running
+                    torch.cuda.synchronize()
+
+                    test_batch_time = start_time.elapsed_time(end_time) / 1000  # Converting from ms to s
+                else:
+                    # Use Python time module for timing if CUDA is not available
+                    start_time = time.time()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    test_batch_time = time.time() - start_time
+
                 test_elapsed_time.append(test_batch_time)
 
                 test_loss += criterion(output, target).item() * data.size(0)

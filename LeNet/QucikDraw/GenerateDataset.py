@@ -1,48 +1,156 @@
 import os
 import json
 import random
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
 
-# 定义 JSON 文件夹路径和输出图片文件夹路径
-json_folder = "../data/data/"
-output_folder = "../data/png_files/"
+# Define the path where the JSON files are located
+json_folder = "../data/data/Dataset/"
+output_folder = "../data/QuickDraw/"
 
-# 定义抽样数量和训练集、测试集的比例
-sample_size = 12000
-train_size = 10000
-test_size = 2000
+# Define the size and proportion of the training set and test set in the dataset
+train_size_per_file = 10000
+test_size_per_file = 2000
 
-# 存储抽样结果的列表
-sampled_examples = []
+# Store the list of sampling results
+train_examples = []
+test_examples = []
 
-# 遍历 JSON 文件夹中的所有文件
+# Traverse all the JSON files
 for filename in os.listdir(json_folder):
     if filename.endswith(".json"):
-        # 构建 JSON 文件的完整路径
+        # Create the full path of the JSON file
         json_path = os.path.join(json_folder, filename)
 
-        # 读取 JSON 文件数据
+        # Read the data from the JSON file
         with open(json_path) as f:
             settings = json.load(f)
 
-        # 随机抽取指定数量的例子，并为每个例子分配标签
-        random_examples = random.sample(settings, sample_size)
-        labeled_examples = [(example, filename.split(".")[0]) for example in random_examples]
+        # Randomly select a given number of datasets and assign labels to them
+        random_train_examples = random.sample(settings, train_size_per_file)
+        random_test_examples = random.sample(settings, test_size_per_file)
 
-        # 将抽样结果添加到总体样本列表中
-        sampled_examples.extend(labeled_examples)
+        train_labeled_examples = [(example, filename.split(".")[0]) for example in random_train_examples]
+        test_labeled_examples = [(example, filename.split(".")[0]) for example in random_test_examples]
 
-# 打印抽样结果的数量
-print(f"总共抽取了 {len(sampled_examples)} 个例子")
+        # Add these samples to the example lists
+        train_examples.extend(train_labeled_examples)
+        test_examples.extend(test_labeled_examples)
 
-# 随机打乱样本顺序
-random.shuffle(sampled_examples)
+print(f"Total examples: {len(train_examples) + len(test_examples)}")
 
-# 构建训练集和测试集，并分别提取样本和标签
-train_set = sampled_examples[:train_size]
-test_set = sampled_examples[train_size:train_size+test_size]
-train_data, train_labels = zip(*train_set)
-test_data, test_labels = zip(*test_set)
+random.shuffle(train_examples)
+random.shuffle(test_examples)
 
-# 打印训练集和测试集的数量
-print(f"训练集数量：{len(train_data)}")
-print(f"测试集数量：{len(test_data)}")
+# Create the training and test datasets
+train_data, train_labels = zip(*train_examples)
+test_data, test_labels = zip(*test_examples)
+
+# Define the label mapping
+label_mapping = {
+    'airplane': 0,
+    'bed': 1,
+    'bridge': 2,
+    'diamond': 3,
+    'ice cream': 4,
+    'keyboard': 5,
+    'skateboard': 6,
+    'strawberry': 7,
+    'sweater': 8,
+    'washing machine': 9
+}
+
+# Convert the labels to numeric encoding
+train_labels_encoded = np.array([label_mapping[label] for label in train_labels], dtype=np.int64)
+test_labels_encoded = np.array([label_mapping[label] for label in test_labels], dtype=np.int64)
+
+# Save PNG images and pixel values
+train_data_pixels = []
+test_data_pixels = []
+
+# Traverse the drawing data in the training set and save PNG images and pixel values
+for i, drawing in enumerate(train_data):
+    plt.figure()
+    for stroke in drawing['drawing']:
+        x = stroke[0]
+        y = stroke[1]
+        plt.plot(x, y, 'k')
+
+    ax = plt.gca()
+    ax.xaxis.set_ticks_position('top')
+    ax.invert_yaxis()
+    plt.axis('off')
+
+    # Set the image size to 28x28 pixels
+    fig = plt.gcf()
+    fig.set_size_inches(0.28, 0.28)
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+
+    # Create the output subfolder if it doesn't exist
+    output_subfolder = os.path.join(output_folder, "train")
+    os.makedirs(output_subfolder, exist_ok=True)
+
+    # Save the PNG image
+    png_path = os.path.join(output_subfolder, f"{i}.png")
+    plt.savefig(png_path, dpi=100)
+
+    # Read the PNG image and convert it to pixel values
+    image = Image.open(png_path).convert("L")  # Convert to grayscale
+    pixels = np.array(image)
+    train_data_pixels.append(pixels)
+
+    # Print the image size
+    width, height = image.size
+    print(f"Image {png_path} size: {width} x {height}")
+
+    plt.close()
+
+# Traverse the drawing data in the test set and save PNG images and pixel values
+for i, drawing in enumerate(test_data):
+    plt.figure()
+    for stroke in drawing['drawing']:
+        x = stroke[0]
+        y = stroke[1]
+        plt.plot(x, y, 'k')
+
+    ax = plt.gca()
+    ax.xaxis.set_ticks_position('top')
+    ax.invert_yaxis()
+    plt.axis('off')
+
+    # Set the image size to 28x28 pixels
+    fig = plt.gcf()
+    fig.set_size_inches(0.28, 0.28)
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+
+    # Create the output subfolder if it doesn't exist
+    output_subfolder = os.path.join(output_folder, "test")
+    os.makedirs(output_subfolder, exist_ok=True)
+
+    # Save the PNG image
+    png_path = os.path.join(output_subfolder, f"{i}.png")
+    plt.savefig(png_path, dpi=100)
+
+    # Read the PNG image and convert it to pixel values
+    image = Image.open(png_path).convert("L")  # Convert to grayscale
+    pixels = np.array(image)
+    test_data_pixels.append(pixels)
+
+    # Print the image size
+    width, height = image.size
+    print(f"Image {png_path} size: {width} x {height}")
+
+    plt.close()
+
+# Convert pixel values to NumPy arrays
+train_data_pixels = np.array(train_data_pixels, dtype=np.uint8)
+test_data_pixels = np.array(test_data_pixels, dtype=np.uint8)
+
+# Save as .npy files
+np.save(os.path.join(output_folder, "train_data.npy"), train_data_pixels)
+np.save(os.path.join(output_folder, "test_data.npy"), test_data_pixels)
+np.save(os.path.join(output_folder, "train_labels.npy"), train_labels_encoded)
+np.save(os.path.join(output_folder, "test_labels.npy"), test_labels_encoded)
+
+print("Data saved successfully!")

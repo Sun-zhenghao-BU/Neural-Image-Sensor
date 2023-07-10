@@ -9,7 +9,7 @@ import random
 import ssl
 import sys
 sys.path.append("../Model")
-from model3 import LeNet
+from model_3 import LeNet
 
 Batch_size = 512
 Epoch = 2
