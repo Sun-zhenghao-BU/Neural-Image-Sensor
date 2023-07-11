@@ -48,7 +48,7 @@ train_loader = torch.utils.data.DataLoader(
 
 test_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TestSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TestLabels.squeeze())),
-    batch_size=Batch_size,
+    batch_size=1,
     shuffle=True)
 
 
@@ -142,7 +142,6 @@ avg_train_loss = np.mean(train_loss_runs, axis=0)
 avg_test_loss = np.mean(test_loss_runs, axis=0)
 avg_accuracy = np.mean(accuracy_runs, axis=0)
 avg_test_time = np.mean(test_time_runs, axis=1)
-
 var_accuracy = np.var(accuracy_runs, axis=0)
 
 fig1, ax1 = plt.subplots()
@@ -188,12 +187,12 @@ for epoch, var in enumerate(var_accuracy):
 print(len(avg_test_time))
 results_table = pd.DataFrame({
     'Run': np.arange(1, Runs + 1),
-    'Test Time (s)': avg_test_time
+    'Test Time (s)': avg_test_time/len(test_loader)
 })
-
 print(results_table)
 
 avg = np.mean(avg_test_time)
+singlePicTime = avg / len(test_loader)
 print(avg)
 
 plt.show()
