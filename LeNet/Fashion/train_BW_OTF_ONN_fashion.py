@@ -37,6 +37,10 @@ Batch_size = 512
 Epoch = 20
 Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if Device.type == 'cuda':
+    print("Using CUDA for computation")
+else:
+    print("Using CPU for computation")
 Model = LeNet()
 Model = Model.to(Device)
 summary(Model, input_size=(8, 28, 28))
@@ -49,7 +53,7 @@ train_loader = torch.utils.data.DataLoader(
 
 test_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TestSet), torch.from_numpy(TestLabels.squeeze())),
-    batch_size=Batch_size,
+    batch_size=1,
     shuffle=True)
 
 # Train the model
@@ -69,7 +73,7 @@ for run in range(Runs):
         Model.train()
         for batch_idx, (data, target) in enumerate(train_loader):
             # data = data.to(Device).float()
-            data = data.to(Device).type(torch.float32)
+            data = data.to(Device).float()
             target = target.to(Device).long()
             Optimizer.zero_grad()
             output = Model(data)
@@ -97,10 +101,27 @@ for run in range(Runs):
                 data = data.to(Device).float()
                 target = target.to(Device).long()
 
-                start_time = time.time()
-                output = Model(data)
-                pred = output.max(1, keepdim=True)[1]
-                test_batch_time = time.time() - start_time
+                if torch.cuda.is_available():
+                    # Use CUDA event for timing if CUDA is available
+                    start_time = torch.cuda.Event(enable_timing=True)
+                    end_time = torch.cuda.Event(enable_timing=True)
+
+                    start_time.record()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    end_time.record()
+
+                    # Waits for everything to finish running
+                    torch.cuda.synchronize()
+
+                    test_batch_time = start_time.elapsed_time(end_time)
+                else:
+                    # Use Python time module for timing if CUDA is not available
+                    start_time = time.time()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    test_batch_time = time.time() - start_time
+
                 test_elapsed_time.append(test_batch_time)
 
                 test_loss += criterion(output, target).item() * data.size(0)
@@ -168,15 +189,25 @@ for epoch, var in enumerate(var_accuracy):
                  ha='center', va='bottom')
 
 # Display the results table
-print(len(avg_test_time))
-results_table = pd.DataFrame({
-    'Run': np.arange(1, Runs + 1),
-    'Test Time (s)': avg_test_time
-})
-
-print(results_table)
-
 avg = np.mean(avg_test_time)
-print(avg)
+
+if Device.type == 'cuda':
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (ms)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
+else:
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (s)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg * 1000 / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
 
 plt.show()

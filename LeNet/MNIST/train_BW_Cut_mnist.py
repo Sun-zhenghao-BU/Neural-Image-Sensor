@@ -1,0 +1,155 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import torch
+import torch.nn as nn
+import pandas as pd
+from torch.utils.data import DataLoader
+import torch.optim as optim
+import h5py
+import time
+import sys
+sys.path.append("../Model")
+from model_BW_Cut import LeNet
+
+# Loading .mat file
+trainData = h5py.File('../OTFData/MNIST/MNISTOriginalTrainSet.mat', 'r')
+testData = h5py.File('../OTFData/MNIST/MNISTOriginalTestSet.mat', 'r')
+trainLabels = h5py.File('../OTFData/MNIST/TrainLabels.mat', 'r')
+testLabels = h5py.File('../OTFData/MNIST/TestLabels.mat', 'r')
+
+TrainSet = trainData['TrainImages'][:]
+TestSet = testData['TestImages'][:]
+TrainLabels = trainLabels['TrainLabels'][:]
+TestLabels = testLabels['TestLabels'][:]
+
+print("TrainSet shape:", TrainSet.shape)
+print("TrainLabels shape:", TrainLabels.shape)
+print("TestSet shape:", TestSet.shape)
+print("TestLabels shape:", TestLabels.shape)
+
+train_loss_runs = []
+test_loss_runs = []
+accuracy_runs = []
+test_time_runs = []
+
+Batch_size = 512
+Epoch = 20
+Runs = 10
+Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if Device.type == 'cuda':
+    print("Using CUDA for computation")
+else:
+    print("Using CPU for computation")
+
+train_loader = torch.utils.data.DataLoader(
+    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TrainLabels.squeeze())),
+    batch_size=Batch_size,
+    shuffle=True)
+
+test_loader = torch.utils.data.DataLoader(
+    torch.utils.data.TensorDataset(torch.from_numpy(TestSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TestLabels.squeeze())),
+    batch_size=1,
+    shuffle=True)
+
+
+# Train the model
+for run in range(Runs):
+    print(f'Run: {run + 1}')
+    train_loss_arr = []
+    test_loss_arr = []
+    test_time_arr = []
+    accuracy = []
+    Model = LeNet()
+    Model = Model.to(Device)
+    # Define the optimizer and loss function
+    criterion = nn.CrossEntropyLoss()
+    Optimizer = optim.Adam(Model.parameters(), lr=0.001)
+
+    for epoch in range(1, Epoch + 1):
+        Model.train()
+        for batch_idx, (data, target) in enumerate(train_loader):
+            # data = data.to(Device).float()
+            data = data.to(Device).type(torch.float32)
+            target = target.to(Device).long()
+            Optimizer.zero_grad()
+            output = Model(data)
+            loss = criterion(output, target)
+            loss.backward()
+            Optimizer.step()
+
+            if (batch_idx + 1) % 30 == 0:
+                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+                    epoch, batch_idx * len(data), len(train_loader.dataset),
+                    100. * batch_idx / len(train_loader), loss.item()))
+
+            elif batch_idx == 117:
+                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+                    epoch, len(train_loader.dataset), len(train_loader.dataset),
+                    100. * (batch_idx + 1) / len(train_loader), loss.item()))
+                train_loss_arr.append(loss.item())
+
+        Model.eval()
+        test_loss = 0
+        correct = 0
+        with torch.no_grad():
+            test_elapsed_time = []
+            for data, target in test_loader:
+                data = data.to(Device).float()
+                target = target.to(Device).long()
+
+                if torch.cuda.is_available():
+                    # Use CUDA event for timing if CUDA is available
+                    start_time = torch.cuda.Event(enable_timing=True)
+                    end_time = torch.cuda.Event(enable_timing=True)
+
+                    start_time.record()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    end_time.record()
+
+                    # Waits for everything to finish running
+                    torch.cuda.synchronize()
+
+                    test_batch_time = start_time.elapsed_time(end_time)
+                else:
+                    # Use Python time module for timing if CUDA is not available
+                    start_time = time.time()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    test_batch_time = time.time() - start_time
+
+                test_elapsed_time.append(test_batch_time)
+
+                test_loss += criterion(output, target).item() * data.size(0)
+                correct += pred.eq(target.view_as(pred)).sum().item()
+
+            test_time_arr.append(sum(test_elapsed_time))
+
+        # test_time = time.time() - start_time
+        test_loss /= len(test_loader.dataset)
+        test_loss_arr.append(test_loss)
+        accuracy.append(100. * correct / len(test_loader.dataset))
+        print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.3f}%)\n'.format(
+            test_loss, correct, len(test_loader.dataset),
+            100. * correct / len(test_loader.dataset)))
+
+    test_time_runs.append(test_time_arr)
+    train_loss_runs.append(train_loss_arr)
+    test_loss_runs.append(test_loss_arr)
+    accuracy_runs.append(accuracy)
+
+avg_train_loss = np.mean(train_loss_runs, axis=0)
+avg_test_loss = np.mean(test_loss_runs, axis=0)
+avg_accuracy = np.mean(accuracy_runs, axis=0)
+avg_test_time = np.mean(test_time_runs, axis=1)
+var_accuracy = np.var(accuracy_runs, axis=0)
+
+fig1, ax1 = plt.subplots()
+ax1.plot(np.arange(1, len(avg_accuracy) + 1), avg_accuracy, color='red', linewidth=1, linestyle='solid',
+         label='Accuracy')
+ax1.set_title('Test Accuracy')
+ax1.set_xlabel('Epochs')
+ax1.set_ylabel('Accuracy')
+ax1.legend()
+final_accuracy = avg_accuracy[-1]
+ax1.scatter(len(avg_accuracy), final_accuracy, color='red', label='Last Accuracy')

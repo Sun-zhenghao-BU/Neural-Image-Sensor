@@ -10,16 +10,16 @@ import h5py
 import time
 import sys
 sys.path.append("../Model")
-from model_BW_OTF_ONN import LeNet
+from model_BW_ONN import LeNet
 
 # Loading .mat file
-trainData = h5py.File('../OTFData/MNIST/TrainSet.mat', 'r')
-testData = h5py.File('../OTFData/MNIST/TestSet.mat', 'r')
+trainData = h5py.File('../OTFData/MNIST/MNISTOriginalTrainSet.mat', 'r')
+testData = h5py.File('../OTFData/MNIST/MNISTOriginalTestSet.mat', 'r')
 trainLabels = h5py.File('../OTFData/MNIST/TrainLabels.mat', 'r')
 testLabels = h5py.File('../OTFData/MNIST/TestLabels.mat', 'r')
 
-TrainSet = trainData['TrainSet'][:]
-TestSet = testData['TestSet'][:]
+TrainSet = trainData['TrainImages'][:]
+TestSet = testData['TestImages'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
 TestLabels = testLabels['TestLabels'][:]
 
@@ -29,12 +29,12 @@ print("TestSet shape:", TestSet.shape)
 print("TestLabels shape:", TestLabels.shape)
 
 Batch_size = 512
-Epoch = 20
-Runs = 10
+Epoch = 3
+Runs = 5
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Model = LeNet()
 Model = Model.to(Device)
-summary(Model, input_size=(8, 28, 28))
+summary(Model, input_size=(1, 28, 28))
 
 train_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),

@@ -10,9 +10,9 @@ class LeNet(nn.Module):
         # Define C1 layer (1 input channel, 8 output channel, kernel size is 5)
         self.conv1 = nn.Conv2d(1, 8, 5, padding=2, padding_mode='replicate')
         # Define a batchNorm layer
-        self.bn2 = nn.BatchNorm2d(8)
+        self.bn1 = nn.BatchNorm2d(8)
         # Define maxPooling1 (Filter size is 2*2)
-        self.maxPool2 = nn.MaxPool2d(2, 2)
+        self.maxPool1 = nn.MaxPool2d(2, 2)
         # Define ReLU activation function
         self.relu = nn.ReLU()
         # Define full connection layers size

@@ -4,6 +4,7 @@ import torch
 import pandas as pd
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from torchsummary import summary
 import torch.optim as optim
 import h5py
 import time
@@ -27,10 +28,23 @@ print("TrainLabels shape:", TrainLabels.shape)
 print("TestSet shape:", TestSet.shape)
 print("TestLabels shape:", TestLabels.shape)
 
+train_loss_runs = []
+test_loss_runs = []
+accuracy_runs = []
+test_time_runs = []
+
 Batch_size = 512
 Epoch = 20
 Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if Device.type == 'cuda':
+    print("Using CUDA for computation")
+else:
+    print("Using CPU for computation")
+Model = LeNet()
+Model = Model.to(Device)
+summary(Model, input_size=(8, 28, 28))
+print("Device:", Device)
 
 train_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),
@@ -39,13 +53,8 @@ train_loader = torch.utils.data.DataLoader(
 
 test_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TestSet), torch.from_numpy(TestLabels.squeeze())),
-    batch_size=Batch_size,
+    batch_size=1,
     shuffle=True)
-
-train_loss_runs = []
-test_loss_runs = []
-accuracy_runs = []
-test_time_runs = []
 
 for run in range(Runs):
     print(f'Run: {run + 1}')
@@ -82,23 +91,46 @@ for run in range(Runs):
                 train_loss_arr.append(loss.item())
 
         Model.eval()
-        start_time = time.time()
         test_loss = 0
         correct = 0
         with torch.no_grad():
+            test_elapsed_time = []
             for data, target in test_loader:
                 data = data.to(Device).float()
                 target = target.to(Device).long()
-                output = Model(data)
+
+                if torch.cuda.is_available():
+                    # Use CUDA event for timing if CUDA is available
+                    start_time = torch.cuda.Event(enable_timing=True)
+                    end_time = torch.cuda.Event(enable_timing=True)
+
+                    start_time.record()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    end_time.record()
+
+                    # Waits for everything to finish running
+                    torch.cuda.synchronize()
+
+                    test_batch_time = start_time.elapsed_time(end_time)
+                else:
+                    # Use Python time module for timing if CUDA is not available
+                    start_time = time.time()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    test_batch_time = time.time() - start_time
+
+                test_elapsed_time.append(test_batch_time)
+
                 test_loss += criterion(output, target).item() * data.size(0)
-                pred = output.max(1, keepdim=True)[1]
                 correct += pred.eq(target.view_as(pred)).sum().item()
 
-        test_time = time.time() - start_time
+            test_time_arr.append(sum(test_elapsed_time))
+
+        # test_time = time.time() - start_time
         test_loss /= len(test_loader.dataset)
         test_loss_arr.append(test_loss)
         accuracy.append(100. * correct / len(test_loader.dataset))
-        test_time_arr.append(test_time)
         print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.3f}%)\n'.format(
             test_loss, correct, len(test_loader.dataset),
             100. * correct / len(test_loader.dataset)))
@@ -112,6 +144,8 @@ avg_train_loss = np.mean(train_loss_runs, axis=0)
 avg_test_loss = np.mean(test_loss_runs, axis=0)
 avg_accuracy = np.mean(accuracy_runs, axis=0)
 avg_test_time = np.mean(test_time_runs, axis=1)
+
+var_accuracy = np.var(accuracy_runs, axis=0)
 
 fig1, ax1 = plt.subplots()
 ax1.plot(np.arange(1, len(avg_accuracy) + 1), avg_accuracy, color='red', linewidth=1, linestyle='solid',
@@ -141,18 +175,39 @@ ax2.set_xlabel('Epochs')
 ax2.set_ylabel('Loss Value')
 ax2.set_xticks(epochs)
 
+fig3, ax3 = plt.subplots()
+ax3.plot(np.arange(1, len(var_accuracy) + 1), var_accuracy, color='blue', linewidth=1, linestyle='solid')
+ax3.set_title('Variance of Accuracy across Runs')
+ax3.set_xlabel('Epochs')
+ax3.set_ylabel('Variance')
+ax3.set_xticks(epochs)
+
+for epoch, var in enumerate(var_accuracy):
+    ax3.annotate(f'Var: {var:.2f}', xy=(epoch + 1, var), xytext=(epoch + 1, var + 0.02),
+                 ha='center', va='bottom')
+
 # Display the results table
-results_table = pd.DataFrame({
-    'Run': np.arange(1, Runs + 1),
-    'Test Time (s)': avg_test_time
-})
-
-print(results_table)
-
 avg = np.mean(avg_test_time)
-print(avg)
+
+if Device.type == 'cuda':
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (ms)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
+else:
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (s)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg * 1000 / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
 
 plt.show()
-
 
 
