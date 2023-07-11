@@ -110,7 +110,7 @@ for run in range(Runs):
                     # Waits for everything to finish running
                     torch.cuda.synchronize()
 
-                    test_batch_time = start_time.elapsed_time(end_time) / 1000  # Converting from ms to s
+                    test_batch_time = start_time.elapsed_time(end_time)
                 else:
                     # Use Python time module for timing if CUDA is not available
                     start_time = time.time()
@@ -184,15 +184,25 @@ for epoch, var in enumerate(var_accuracy):
                  ha='center', va='bottom')
 
 # Display the results table
-print(len(avg_test_time))
-results_table = pd.DataFrame({
-    'Run': np.arange(1, Runs + 1),
-    'Test Time (s)': avg_test_time/len(test_loader)
-})
-print(results_table)
-
 avg = np.mean(avg_test_time)
-singlePicTime = avg / len(test_loader)
-print(avg)
+
+if Device.type == 'cuda':
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (ms)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
+else:
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (s)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg * 1000 / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
 
 plt.show()
