@@ -142,6 +142,7 @@ avg_train_loss = np.mean(train_loss_runs, axis=0)
 avg_test_loss = np.mean(test_loss_runs, axis=0)
 avg_accuracy = np.mean(accuracy_runs, axis=0)
 avg_test_time = np.mean(test_time_runs, axis=1)
+
 var_accuracy = np.var(accuracy_runs, axis=0)
 
 fig1, ax1 = plt.subplots()
@@ -153,3 +154,56 @@ ax1.set_ylabel('Accuracy')
 ax1.legend()
 final_accuracy = avg_accuracy[-1]
 ax1.scatter(len(avg_accuracy), final_accuracy, color='red', label='Last Accuracy')
+
+# Add some text annotation
+ax1.annotate(f'{final_accuracy:.2f}', xy=(len(avg_accuracy), final_accuracy),
+             xytext=(len(avg_accuracy), final_accuracy + 0.02),
+             ha='center', va='bottom')
+
+epochs = np.arange(1, len(avg_train_loss) + 1)
+ax1.set_xticks(epochs)
+ax1.set_xticklabels(epochs.astype(int))
+
+fig2, ax2 = plt.subplots()
+ax2.plot(epochs, avg_train_loss, color='green', linewidth=1, linestyle='solid', label='Train Loss')
+ax2.plot(epochs, avg_test_loss, color='blue', linewidth=1, linestyle='solid', label='Test Loss')
+ax2.legend()
+ax2.set_title('Loss Value of Train dataset and Test dataset')
+ax2.set_xlabel('Epochs')
+ax2.set_ylabel('Loss Value')
+ax2.set_xticks(epochs)
+
+fig3, ax3 = plt.subplots()
+ax3.plot(np.arange(1, len(var_accuracy) + 1), var_accuracy, color='blue', linewidth=1, linestyle='solid')
+ax3.set_title('Variance of Accuracy across Runs')
+ax3.set_xlabel('Epochs')
+ax3.set_ylabel('Variance')
+ax3.set_xticks(epochs)
+
+for epoch, var in enumerate(var_accuracy):
+    ax3.annotate(f'Var: {var:.2f}', xy=(epoch+1, var), xytext=(epoch+1, var + 0.02),
+                 ha='center', va='bottom')
+
+# Display the results table
+avg = np.mean(avg_test_time)
+
+if Device.type == 'cuda':
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (ms)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
+else:
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (s)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg * 1000 / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
+
+plt.show()
