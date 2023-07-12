@@ -2,8 +2,9 @@ import torch
 from torchsummary import summary
 from thop import profile
 import sys
+
 sys.path.append("../Model")
-from model_RGB_OTF import LeNet
+from model_RGB import LeNet
 
 # Define the model
 model = LeNet()
@@ -11,7 +12,7 @@ model = LeNet()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-input_size = (24, 32, 32)
+input_size = (3, 32, 32)
 
 summary(model, input_size=input_size)
 

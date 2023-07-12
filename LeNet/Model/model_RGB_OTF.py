@@ -38,7 +38,3 @@ class LeNet(nn.Module):
 
 
 model = LeNet()
-
-for name, param in model.named_parameters():
-    if 'bias' in name:
-        print(f'Layer: {name} has bias')

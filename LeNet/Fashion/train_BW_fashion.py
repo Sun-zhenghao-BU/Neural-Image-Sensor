@@ -33,8 +33,8 @@ accuracy_runs = []
 test_time_runs = []
 
 Batch_size = 512
-Epoch = 20
-Runs = 10
+Epoch = 1
+Runs = 2
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
     print("Using CUDA for computation")
@@ -164,6 +164,7 @@ ax1.set_xticks(epochs)
 ax1.set_xticklabels(epochs.astype(int))
 
 fig2, ax2 = plt.subplots()
+print(epochs)
 ax2.plot(epochs, avg_train_loss, color='green', linewidth=1, linestyle='solid', label='Train Loss')
 ax2.plot(epochs, avg_test_loss, color='blue', linewidth=1, linestyle='solid', label='Test Loss')
 ax2.legend()

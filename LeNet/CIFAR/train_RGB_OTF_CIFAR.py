@@ -13,11 +13,12 @@ sys.path.append("../Model")
 from model_RGB_OTF import LeNet
 
 # Loading .mat file
-trainData = h5py.File('../OTFData/CIFAR/CIFARTrainSet.mat', 'r')
-testData = h5py.File('../OTFData/CIFAR/CIFARTestSet.mat', 'r')
-trainLabels = h5py.File('../OTFData/CIFAR/CIFARTrainLabels.mat', 'r')
-testLabels = h5py.File('../OTFData/CIFAR/CIFARTestLabels.mat', 'r')
+trainData = h5py.File('../OTFData/CIFAR/TrainSet.mat', 'r')
+testData = h5py.File('../OTFData/CIFAR/TestSet.mat', 'r')
+trainLabels = h5py.File('../OTFData/CIFAR/TrainLabels.mat', 'r')
+testLabels = h5py.File('../OTFData/CIFAR/TestLabels.mat', 'r')
 
+# Open the HDF5 files
 TrainSet = trainData['TrainSet'][:]
 TestSet = testData['TestSet'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
@@ -34,8 +35,8 @@ accuracy_runs = []
 test_time_runs = []
 
 Batch_size = 512
-Epoch = 20
-Runs = 10
+Epoch = 3
+Runs = 5
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
     print("Using CUDA for computation")
@@ -43,7 +44,7 @@ else:
     print("Using CPU for computation")
 Model = LeNet()
 Model = Model.to(Device)
-summary(Model, input_size=(8, 28, 28))
+summary(Model, input_size=(24, 32, 32))
 print("Device:", Device)
 
 train_loader = torch.utils.data.DataLoader(
@@ -79,12 +80,12 @@ for run in range(Runs):
             loss.backward()
             Optimizer.step()
 
-            if (batch_idx + 1) % 30 == 0:
+            if (batch_idx + 1) % 24 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
                            100. * batch_idx / len(train_loader), loss.item()))
 
-            elif batch_idx == 117:
+            elif batch_idx == 95:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, len(train_loader.dataset), len(train_loader.dataset),
                     100. * (batch_idx + 1) / len(train_loader), loss.item()))

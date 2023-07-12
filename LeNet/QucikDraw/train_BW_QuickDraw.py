@@ -10,7 +10,7 @@ import torch.optim as optim
 import time
 import sys
 sys.path.append("../Model")
-from model_BW_ONN import LeNet
+from model_BW import LeNet
 
 # Load the dataset
 train_data = np.load("../data/QuickDraw/train_data.npy")
@@ -43,8 +43,8 @@ class QuickDrawDataset(Dataset):
 
 # Create DataLoader for training and test datasets
 batch_size = 512
-Epoch = 20
-Runs = 10
+Epoch = 3
+Runs = 5
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Model = LeNet()
 Model = Model.to(Device)
@@ -54,7 +54,7 @@ print("Device:", Device)
 train_dataset = QuickDrawDataset(train_data, train_labels)
 test_dataset = QuickDrawDataset(test_data, test_labels)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
 train_loss_runs = []
 test_loss_runs = []
@@ -86,12 +86,12 @@ for run in range(Runs):
             loss.backward()
             Optimizer.step()
 
-            if (batch_idx + 1) % 30 == 0:
+            if (batch_idx + 1) % 49 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
-                           100. * batch_idx / len(train_loader), loss.item()))
+                    100. * batch_idx / len(train_loader), loss.item()))
 
-            elif batch_idx == 117:
+            elif batch_idx == 195:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, len(train_loader.dataset), len(train_loader.dataset),
                     100. * (batch_idx + 1) / len(train_loader), loss.item()))
@@ -106,10 +106,27 @@ for run in range(Runs):
                 data = data.to(Device).float()
                 target = target.to(Device).long()
 
-                start_time = time.time()
-                output = Model(data)
-                pred = output.max(1, keepdim=True)[1]
-                test_batch_time = time.time() - start_time
+                if torch.cuda.is_available():
+                    # Use CUDA event for timing if CUDA is available
+                    start_time = torch.cuda.Event(enable_timing=True)
+                    end_time = torch.cuda.Event(enable_timing=True)
+
+                    start_time.record()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    end_time.record()
+
+                    # Waits for everything to finish running
+                    torch.cuda.synchronize()
+
+                    test_batch_time = start_time.elapsed_time(end_time)
+                else:
+                    # Use Python time module for timing if CUDA is not available
+                    start_time = time.time()
+                    output = Model(data)
+                    pred = output.max(1, keepdim=True)[1]
+                    test_batch_time = time.time() - start_time
+
                 test_elapsed_time.append(test_batch_time)
 
                 test_loss += criterion(output, target).item() * data.size(0)
@@ -134,7 +151,6 @@ avg_train_loss = np.mean(train_loss_runs, axis=0)
 avg_test_loss = np.mean(test_loss_runs, axis=0)
 avg_accuracy = np.mean(accuracy_runs, axis=0)
 avg_test_time = np.mean(test_time_runs, axis=1)
-
 var_accuracy = np.var(accuracy_runs, axis=0)
 
 fig1, ax1 = plt.subplots()
@@ -173,20 +189,30 @@ ax3.set_ylabel('Variance')
 ax3.set_xticks(epochs)
 
 for epoch, var in enumerate(var_accuracy):
-    ax3.annotate(f'Var: {var:.2f}', xy=(epoch + 1, var), xytext=(epoch + 1, var + 0.02),
+    ax3.annotate(f'Var: {var:.2f}', xy=(epoch+1, var), xytext=(epoch+1, var + 0.02),
                  ha='center', va='bottom')
 
 # Display the results table
-print(len(avg_test_time))
-results_table = pd.DataFrame({
-    'Run': np.arange(1, Runs + 1),
-    'Test Time (s)': avg_test_time
-})
-
-print(results_table)
-
 avg = np.mean(avg_test_time)
-print(avg)
+
+if Device.type == 'cuda':
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (ms)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
+else:
+    results_table = pd.DataFrame({
+        'Run': np.arange(1, Runs + 1),
+        '10000 Pics Test Time (s)': avg_test_time
+    })
+    print(results_table)
+
+    singlePicTime = avg * 1000 / len(test_loader)
+    print(f'{singlePicTime} ms per pic')
 
 plt.show()
 
