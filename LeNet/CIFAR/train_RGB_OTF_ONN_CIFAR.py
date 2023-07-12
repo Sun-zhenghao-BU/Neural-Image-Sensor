@@ -12,13 +12,13 @@ sys.path.append("../Model")
 from model_RGB_OTF_ONN import LeNet
 
 # Loading .mat file
-trainData = h5py.File('../OTFData/CIFAR/RawTrainSet.mat', 'r')
-testData = h5py.File('../OTFData/CIFAR/RawTestSet.mat', 'r')
+trainData = h5py.File('../OTFData/CIFAR/TrainSet.mat', 'r')
+testData = h5py.File('../OTFData/CIFAR/TestSet.mat', 'r')
 trainLabels = h5py.File('../OTFData/CIFAR/TrainLabels.mat', 'r')
 testLabels = h5py.File('../OTFData/CIFAR/TestLabels.mat', 'r')
 
-TrainSet = trainData['TrainImages'][:]
-TestSet = testData['TestImages'][:]
+TrainSet = trainData['TrainSet'][:]
+TestSet = testData['TestSet'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
 TestLabels = testLabels['TestLabels'][:]
 
@@ -33,8 +33,8 @@ accuracy_runs = []
 test_time_runs = []
 
 Batch_size = 512
-Epoch = 3
-Runs = 5
+Epoch = 20
+Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
     print("Using CUDA for computation")
@@ -82,12 +82,10 @@ for run in range(Runs):
                     epoch, batch_idx * len(data), len(train_loader.dataset),
                     100. * batch_idx / len(train_loader), loss.item()))
 
-            elif batch_idx == 97:
-                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch, len(train_loader.dataset), len(train_loader.dataset),
-                    100. * (batch_idx + 1) / len(train_loader), loss.item()))
-                train_loss_arr.append(loss.item())
-
+        print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+            epoch, len(train_loader.dataset), len(train_loader.dataset),
+            100. * (batch_idx + 1) / len(train_loader), loss.item()))
+        train_loss_arr.append(loss.item())
         Model.eval()
         test_loss = 0
         correct = 0

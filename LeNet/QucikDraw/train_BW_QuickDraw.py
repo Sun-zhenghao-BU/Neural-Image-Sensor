@@ -8,58 +8,51 @@ from torch.utils.data import DataLoader
 from torchsummary import summary
 import torch.optim as optim
 import time
+import h5py
 import sys
 sys.path.append("../Model")
 from model_BW import LeNet
 
 # Load the dataset
-train_data = np.load("../data/QuickDraw/train_data.npy")
-test_data = np.load("../data/QuickDraw/test_data.npy")
-train_labels = np.load("../data/QuickDraw/train_labels.npy")
-test_labels = np.load("../data/QuickDraw/test_labels.npy")
+trainData = h5py.File("../OTFData/QuickDraw/RawTrainSet.mat")
+testData = h5py.File("../OTFData/QuickDraw/RawTestSet.mat")
+trainLabels = h5py.File("../OTFData/QuickDraw/TrainLabels.mat")
+testLabels = h5py.File("../OTFData/QuickDraw/TestLabels.mat")
 
-train_data_shape = train_data.shape
-test_data_shape = test_data.shape
+TrainSet = trainData['TrainData'][:]
+TestSet = testData['TestData'][:]
+TrainLabels = trainLabels['TrainLabels'][:]
+TestLabels = testLabels['TestLabels'][:]
 
-print("Train data shape:", train_data_shape)
-print("Test data shape:", test_data_shape)
-
-class QuickDrawDataset(Dataset):
-    def __init__(self, data, labels):
-        self.data = data.reshape(-1, 28, 28).astype(np.uint8)
-        self.labels = labels.astype(np.int8)
-
-    def __getitem__(self, index):
-        image = self.data[index, :, :]
-        # Resize image to 28*28
-        image = torch.tensor(image)
-        image = image.float() / 255.0
-        image = image.unsqueeze(0)
-
-        return image, torch.tensor(self.labels[index])
-
-    def __len__(self):
-        return len(self.labels)
-
-# Create DataLoader for training and test datasets
-batch_size = 512
-Epoch = 3
-Runs = 5
-Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-Model = LeNet()
-Model = Model.to(Device)
-summary(Model, input_size=(1, 28, 28))
-
-print("Device:", Device)
-train_dataset = QuickDrawDataset(train_data, train_labels)
-test_dataset = QuickDrawDataset(test_data, test_labels)
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
+print("TrainSet shape:", TrainSet.shape)
+print("TrainLabels shape:", TrainLabels.shape)
+print("TestSet shape:", TestSet.shape)
+print("TestLabels shape:", TestLabels.shape)
 
 train_loss_runs = []
 test_loss_runs = []
 accuracy_runs = []
 test_time_runs = []
+
+Batch_size = 512
+Epoch = 3
+Runs = 5
+Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if Device.type == 'cuda':
+    print("Using CUDA for computation")
+else:
+    print("Using CPU for computation")
+
+train_loader = torch.utils.data.DataLoader(
+    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TrainLabels.squeeze())),
+    batch_size=Batch_size,
+    shuffle=True)
+
+test_loader = torch.utils.data.DataLoader(
+    torch.utils.data.TensorDataset(torch.from_numpy(TestSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TestLabels.squeeze())),
+    batch_size=1,
+    shuffle=True)
+
 
 # Train the model
 for run in range(Runs):
@@ -86,17 +79,16 @@ for run in range(Runs):
             loss.backward()
             Optimizer.step()
 
-            if (batch_idx + 1) % 49 == 0:
+            if (batch_idx + 1) % 50 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
                     100. * batch_idx / len(train_loader), loss.item()))
 
-            elif batch_idx == 195:
-                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch, len(train_loader.dataset), len(train_loader.dataset),
-                    100. * (batch_idx + 1) / len(train_loader), loss.item()))
-                train_loss_arr.append(loss.item())
 
+        print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+            epoch, len(train_loader.dataset), len(train_loader.dataset),
+            100. * (batch_idx + 1) / len(train_loader), loss.item()))
+        train_loss_arr.append(loss.item())
         Model.eval()
         test_loss = 0
         correct = 0

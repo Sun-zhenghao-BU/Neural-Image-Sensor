@@ -35,8 +35,8 @@ accuracy_runs = []
 test_time_runs = []
 
 Batch_size = 512
-Epoch = 3
-Runs = 5
+Epoch = 20
+Runs = 10
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
     print("Using CUDA for computation")
@@ -85,12 +85,10 @@ for run in range(Runs):
                     epoch, batch_idx * len(data), len(train_loader.dataset),
                            100. * batch_idx / len(train_loader), loss.item()))
 
-            elif batch_idx == 95:
-                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch, len(train_loader.dataset), len(train_loader.dataset),
-                    100. * (batch_idx + 1) / len(train_loader), loss.item()))
-                train_loss_arr.append(loss.item())
-
+        print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+            epoch, len(train_loader.dataset), len(train_loader.dataset),
+            100. * (batch_idx + 1) / len(train_loader), loss.item()))
+        train_loss_arr.append(loss.item())
         Model.eval()
         test_loss = 0
         correct = 0
