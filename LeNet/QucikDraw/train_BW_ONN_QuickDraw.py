@@ -4,12 +4,13 @@ import numpy as np
 import torch
 import torch.nn as nn
 import pandas as pd
-from torch.utils.data import DataLoader
-from torchsummary import summary
 import torch.optim as optim
 import time
 import h5py
 import sys
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+
 sys.path.append("../Model")
 from model_BW_ONN import LeNet
 
@@ -35,7 +36,7 @@ accuracy_runs = []
 test_time_runs = []
 
 Batch_size = 512
-Epoch = 2
+Epoch = 20
 Runs = 5
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
@@ -53,8 +54,6 @@ test_loader = torch.utils.data.DataLoader(
     batch_size=1,
     shuffle=True)
 
-
-# Train the model
 # Train the model
 for run in range(Runs):
     print(f'Run: {run + 1}')
@@ -71,7 +70,6 @@ for run in range(Runs):
     for epoch in range(1, Epoch + 1):
         Model.train()
         for batch_idx, (data, target) in enumerate(train_loader):
-            # data = data.to(Device).float()
             data = data.to(Device).type(torch.float32)
             target = target.to(Device).long()
             Optimizer.zero_grad()
@@ -93,6 +91,8 @@ for run in range(Runs):
         Model.eval()
         test_loss = 0
         correct = 0
+        y_true = np.array([])
+        y_pred = np.array([])
         with torch.no_grad():
             test_elapsed_time = []
             for data, target in test_loader:
@@ -119,6 +119,9 @@ for run in range(Runs):
                     output = Model(data)
                     pred = output.max(1, keepdim=True)[1]
                     test_batch_time = time.time() - start_time
+
+                y_true = np.append(y_true, target.cpu().numpy())
+                y_pred = np.append(y_pred, pred.cpu().numpy())
 
                 test_elapsed_time.append(test_batch_time)
 
@@ -207,5 +210,14 @@ else:
     singlePicTime = avg * 1000 / len(test_loader)
     print(f'{singlePicTime} ms per pic')
 
+# Generate confusion matrix
+cm = confusion_matrix(y_true, y_pred)
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
+plt.title("Confusion Matrix - Test Set")
+plt.xlabel("Predicted Labels")
+plt.ylabel("True Labels")
 plt.show()
+
 
