@@ -9,8 +9,8 @@ class LeNet(nn.Module):
         super(LeNet, self).__init__()
         # Define maxPooling1 (Filter size is 2*2)
         self.maxPool1 = nn.MaxPool2d(2, 2)
-        # Define C2 layer (8 input channel, 16 output channel, kernel size is 5)
-        self.conv2 = nn.Conv2d(8, 16, 3)
+        # Define C2 layer (8 input channel, 16 output channel, kernel size is 7)
+        self.conv2 = nn.Conv2d(8, 16, 7)
         # Define maxPooling2 (Filter size is 2*2)
         self.maxPool2 = nn.MaxPool2d(2, 2)
         # Define ReLU activation function
@@ -19,9 +19,9 @@ class LeNet(nn.Module):
         self.bn1 = nn.BatchNorm2d(8)
         self.bn2 = nn.BatchNorm2d(16)
         # Define full connection layers size
-        self.fc1 = nn.Linear(16 * 6 * 6, 240)
-        self.fc2 = nn.Linear(240, 168)
-        self.fc3 = nn.Linear(168, 10)
+        self.fc1 = nn.Linear(16 * 4 * 4, 90)
+        self.fc2 = nn.Linear(90, 63)
+        self.fc3 = nn.Linear(63, 10)
 
     def forward(self, x):
         # Connect the input directly to the network

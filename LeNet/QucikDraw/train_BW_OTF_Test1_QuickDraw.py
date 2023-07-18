@@ -1,24 +1,22 @@
+from torch.utils.data import DataLoader, Dataset
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import pandas as pd
 import torch.nn as nn
-from torch.utils.data import DataLoader
-from torchsummary import summary
+import pandas as pd
 import torch.optim as optim
-import h5py
 import time
+import h5py
 import sys
 sys.path.append("../Model")
-from model_RGB_OTF import LeNet
+from model_BW_Test1 import LeNet
 
-# Loading .mat file
-trainData = h5py.File('../OTFData/CIFAR/TrainSet.mat', 'r')
-testData = h5py.File('../OTFData/CIFAR/TestSet.mat', 'r')
-trainLabels = h5py.File('../OTFData/CIFAR/TrainLabels.mat', 'r')
-testLabels = h5py.File('../OTFData/CIFAR/TestLabels.mat', 'r')
+# Load the dataset
+trainData = h5py.File("../OTFData/QuickDraw/TrainSet.mat")
+testData = h5py.File("../OTFData/QuickDraw/TestSet.mat")
+trainLabels = h5py.File("../OTFData/QuickDraw/TrainLabels.mat")
+testLabels = h5py.File("../OTFData/QuickDraw/TestLabels.mat")
 
-# Open the HDF5 files
 TrainSet = trainData['TrainSet'][:]
 TestSet = testData['TestSet'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
@@ -42,10 +40,6 @@ if Device.type == 'cuda':
     print("Using CUDA for computation")
 else:
     print("Using CPU for computation")
-Model = LeNet()
-Model = Model.to(Device)
-summary(Model, input_size=(24, 32, 32))
-print("Device:", Device)
 
 train_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),
@@ -57,6 +51,7 @@ test_loader = torch.utils.data.DataLoader(
     batch_size=1,
     shuffle=True)
 
+# Train the model
 for run in range(Runs):
     print(f'Run: {run + 1}')
     train_loss_arr = []
@@ -65,14 +60,15 @@ for run in range(Runs):
     accuracy = []
     Model = LeNet()
     Model = Model.to(Device)
+    # Define the optimizer and loss function
     criterion = nn.CrossEntropyLoss()
     Optimizer = optim.Adam(Model.parameters(), lr=0.001)
-
 
     for epoch in range(1, Epoch + 1):
         Model.train()
         for batch_idx, (data, target) in enumerate(train_loader):
-            data = data.to(Device).float()
+            # data = data.to(Device).float()
+            data = data.to(Device).type(torch.float32)
             target = target.to(Device).long()
             Optimizer.zero_grad()
             output = Model(data)
@@ -80,10 +76,11 @@ for run in range(Runs):
             loss.backward()
             Optimizer.step()
 
-            if (batch_idx + 1) % 24 == 0:
+            if (batch_idx + 1) % 50 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
-                           100. * batch_idx / len(train_loader), loss.item()))
+                    100. * batch_idx / len(train_loader), loss.item()))
+
 
         print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
             epoch, len(train_loader.dataset), len(train_loader.dataset),
@@ -143,7 +140,6 @@ avg_train_loss = np.mean(train_loss_runs, axis=0)
 avg_test_loss = np.mean(test_loss_runs, axis=0)
 avg_accuracy = np.mean(accuracy_runs, axis=0)
 avg_test_time = np.mean(test_time_runs, axis=1)
-
 var_accuracy = np.var(accuracy_runs, axis=0)
 
 fig1, ax1 = plt.subplots()
@@ -156,17 +152,12 @@ ax1.legend()
 final_accuracy = avg_accuracy[-1]
 ax1.scatter(len(avg_accuracy), final_accuracy, color='red', label='Last Accuracy')
 
-# Add some text annotation
-ax1.annotate(f'{final_accuracy:.2f}', xy=(len(avg_accuracy), final_accuracy),
-             xytext=(len(avg_accuracy), final_accuracy + 0.02),
-             ha='center', va='bottom')
+for i, acc in enumerate(avg_accuracy):
+    ax1.annotate(f'{acc:.2f}', (i+1, acc), textcoords="offset points", xytext=(0, 10), ha='center')
 
 epochs = np.arange(1, len(avg_train_loss) + 1)
 ax1.set_xticks(epochs)
 ax1.set_xticklabels(epochs.astype(int))
-
-for i, acc in enumerate(avg_accuracy):
-    ax1.annotate(f'{acc:.2f}', (i+1, acc), textcoords="offset points", xytext=(0, 10), ha='center')
 
 fig2, ax2 = plt.subplots()
 ax2.plot(epochs, avg_train_loss, color='green', linewidth=1, linestyle='solid', label='Train Loss')
@@ -185,7 +176,7 @@ ax3.set_ylabel('Variance')
 ax3.set_xticks(epochs)
 
 for epoch, var in enumerate(var_accuracy):
-    ax3.annotate(f'Var: {var:.2f}', xy=(epoch + 1, var), xytext=(epoch + 1, var + 0.02),
+    ax3.annotate(f'Var: {var:.2f}', xy=(epoch+1, var), xytext=(epoch+1, var + 0.02),
                  ha='center', va='bottom')
 
 # Display the results table

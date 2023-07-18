@@ -10,7 +10,7 @@ import h5py
 import time
 import sys
 sys.path.append("../Model")
-from model_RGB_OTF import LeNet
+from model_RGB_Test1 import LeNet
 
 # Loading .mat file
 trainData = h5py.File('../OTFData/CIFAR/TrainSet.mat', 'r')
@@ -156,17 +156,12 @@ ax1.legend()
 final_accuracy = avg_accuracy[-1]
 ax1.scatter(len(avg_accuracy), final_accuracy, color='red', label='Last Accuracy')
 
-# Add some text annotation
-ax1.annotate(f'{final_accuracy:.2f}', xy=(len(avg_accuracy), final_accuracy),
-             xytext=(len(avg_accuracy), final_accuracy + 0.02),
-             ha='center', va='bottom')
+for i, acc in enumerate(avg_accuracy):
+    ax1.annotate(f'{acc:.2f}', (i+1, acc), textcoords="offset points", xytext=(0, 10), ha='center')
 
 epochs = np.arange(1, len(avg_train_loss) + 1)
 ax1.set_xticks(epochs)
 ax1.set_xticklabels(epochs.astype(int))
-
-for i, acc in enumerate(avg_accuracy):
-    ax1.annotate(f'{acc:.2f}', (i+1, acc), textcoords="offset points", xytext=(0, 10), ha='center')
 
 fig2, ax2 = plt.subplots()
 ax2.plot(epochs, avg_train_loss, color='green', linewidth=1, linestyle='solid', label='Train Loss')

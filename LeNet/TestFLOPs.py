@@ -4,7 +4,7 @@ from thop import profile
 import sys
 
 sys.path.append("../Model")
-from model_BW_Test1 import LeNet
+from model_BW_Test3 import LeNet
 
 # Define the model
 model = LeNet()

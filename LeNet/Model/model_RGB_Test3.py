@@ -10,23 +10,26 @@ class LeNet(nn.Module):
         # Define maxPooling1 (Filter size is 2*2)
         self.maxPool1 = nn.MaxPool2d(2, 2)
         # Define C2 layer (8 input channel, 16 output channel, kernel size is 5)
-        self.conv2 = nn.Conv2d(8, 16, 3)
+        self.conv1 = nn.Conv2d(24, 28, 3)
+        self.conv2 = nn.Conv2d(28, 32, 3)
         # Define maxPooling2 (Filter size is 2*2)
         self.maxPool2 = nn.MaxPool2d(2, 2)
         # Define ReLU activation function
         self.relu = nn.ReLU()
         # Define batch normalization layers
-        self.bn1 = nn.BatchNorm2d(8)
-        self.bn2 = nn.BatchNorm2d(16)
+        self.bn1 = nn.BatchNorm2d(24)
+        self.bn2 = nn.BatchNorm2d(28)
+        self.bn3 = nn.BatchNorm2d(32)
         # Define full connection layers size
-        self.fc1 = nn.Linear(16 * 6 * 6, 240)
-        self.fc2 = nn.Linear(240, 168)
-        self.fc3 = nn.Linear(168, 10)
+        self.fc1 = nn.Linear(32 * 5 * 5, 120)
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
 
     def forward(self, x):
         # Connect the input directly to the network
         x = self.maxPool1(self.relu(self.bn1(x)))
-        x = self.maxPool2(self.relu(self.bn2(self.conv2(x))))
+        x = self.maxPool2(self.relu(self.bn2(self.conv1(x))))
+        x = self.relu(self.bn3(self.conv2(x)))
 
         x = torch.flatten(x, 1)
         x = func.relu(self.fc1(x))
