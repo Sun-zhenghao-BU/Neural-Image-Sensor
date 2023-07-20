@@ -4,7 +4,7 @@ from thop import profile
 import sys
 
 sys.path.append("../Model")
-from model_BW_Test3 import LeNet
+from model_RGB_Test2 import LeNet
 
 # Define the model
 model = LeNet()
@@ -12,7 +12,7 @@ model = LeNet()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-input_size = (8, 28, 28)
+input_size = (24, 32, 32)
 
 summary(model, input_size=input_size)
 

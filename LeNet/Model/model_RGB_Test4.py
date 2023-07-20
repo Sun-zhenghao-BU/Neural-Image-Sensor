@@ -26,7 +26,7 @@ class LeNet(nn.Module):
     def forward(self, x):
         # Connect the input directly to the network
         x = self.maxPool1(self.relu(self.bn1(x)))
-        x = self.maxPool2(self.relu(self.bn2(self.conv2(x))))
+        x = self.maxPool1(self.relu(self.bn2(self.conv2(x))))
 
         x = torch.flatten(x, 1)
         x = func.relu(self.fc1(x))
