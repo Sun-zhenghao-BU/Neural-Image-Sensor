@@ -262,8 +262,8 @@ accuracy_runs = []
 test_time_runs = []
 
 Batch_size = 512
-Epoch = 20
-Runs = 10
+Epoch = 3
+Runs = 5
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
     print("Using CUDA for computation")
