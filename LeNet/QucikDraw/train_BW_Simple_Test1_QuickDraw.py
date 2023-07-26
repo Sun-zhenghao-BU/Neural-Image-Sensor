@@ -33,14 +33,15 @@ accuracy_runs = []
 test_time_runs = []
 
 Batch_size = 512
-Epoch = 3
-Runs = 5
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
     print("Using CUDA for computation")
+    Epoch = 20
+    Runs = 5
 else:
     print("Using CPU for computation")
-
+    Epoch = 3
+    Runs = 5
 train_loader = torch.utils.data.DataLoader(
     torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),
     batch_size=Batch_size,

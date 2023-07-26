@@ -8,10 +8,10 @@ class LeNet(nn.Module):
     def __init__(self):
         super(LeNet, self).__init__()
         # Define full connection layers size
-        self.fc1 = nn.Linear(8 * 28 * 28, 120)
+        self.fc1 = nn.Linear(1 * 28 * 28, 54)
         # Define ReLU activation function
         self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(120, 10)
+        self.fc2 = nn.Linear(54, 10)
 
     def forward(self, x):
         # Define two pooling layers and connect them to the network

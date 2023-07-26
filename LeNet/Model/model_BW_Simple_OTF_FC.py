@@ -11,8 +11,10 @@ class LeNet(nn.Module):
         self.bn1 = nn.BatchNorm2d(8)
         # Define ReLU activation function
         self.relu = nn.ReLU()
+        # Define maxPooling1 (Filter size is 2*2)
+        self.maxPool1 = nn.MaxPool2d(2, 2)
         # Define full connection layers size
-        self.fc1 = nn.Linear(8 * 28 * 28, 10)
+        self.fc1 = nn.Linear(8 * 14 * 14, 10)
 
     def forward(self, x):
         # Define two pooling layers and connect them to the network

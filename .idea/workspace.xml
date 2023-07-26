@@ -2,38 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c786e6bc-e2d5-48af-aca6-4db818760f17" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/LeNet/CIFAR/train_CIFAR.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Coding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Coding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/t10k-images-idx3-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/t10k-images-idx3-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/t10k-labels-idx1-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/train-images-idx3-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/train-images-idx3-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/train-labels-idx1-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/FashionMNIST/raw/train-labels-idx1-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/CIFAR/model3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/data/model_8input.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/CIFAR/model_3*8input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Fashion/train_8input_fashion.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Fashion/train_8input_fashion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/t10k-images-idx3-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/t10k-images-idx3-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/t10k-labels-idx1-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/train-images-idx3-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/train-images-idx3-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/train-labels-idx1-ubyte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/data/FashionMNIST/raw/train-labels-idx1-ubyte.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/random_images/image_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/MNIST/train_mnist.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/MNIST/train_mnist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_CNN_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_CNN_FC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_FC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_OTF_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_OTF_FC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_Simple_Test1_QuickDraw.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_Simple_Test1_QuickDraw.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_Simple_Test2_QuickDraw.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_Simple_Test2_QuickDraw.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_Simple_Test3_QuickDraw.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_Simple_Test3_QuickDraw.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/TestFLOPs.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/TestFLOPs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,61 +43,46 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/anthony/Master/Neural Image Sensor/Coding/LeNet/CIFAR"
+    "last_opened_file_path": "/Users/anthony/Master/Neural Image Sensor/Coding/LeNet/QucikDraw",
+    "settings.editor.selected.configurable": "PyConsoleConfigurable.Python Console"
   }
 }]]></component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="Coding" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="Coding" />
+      </console-settings>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/LeNet/CIFAR" />
+      <recent name="$PROJECT_DIR$/LeNet/QucikDraw" />
+      <recent name="$PROJECT_DIR$/LeNet/Model" />
       <recent name="$PROJECT_DIR$/LeNet/Fashion" />
-      <recent name="$PROJECT_DIR$/LeNet/Fashion/data" />
+      <recent name="$PROJECT_DIR$/LeNet/CIFAR" />
       <recent name="$PROJECT_DIR$/LeNet/MNIST" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/LeNet/Fashion" />
-      <recent name="$PROJECT_DIR$/LeNet/OTFData/Fashion" />
-      <recent name="$PROJECT_DIR$/LeNet/OTFData/MNIST" />
+      <recent name="$PROJECT_DIR$/LeNet/data/data" />
+      <recent name="$PROJECT_DIR$/LeNet/data/data/Dataset" />
+      <recent name="$PROJECT_DIR$/LeNet/Model" />
+      <recent name="$PROJECT_DIR$/LeNet/data" />
       <recent name="$PROJECT_DIR$/LeNet" />
-      <recent name="$PROJECT_DIR$/LeNet/MNIST" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.train_CIFAR">
-    <configuration name="Generate10" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.train_BW_Simple_Test3_QuickDraw">
+    <configuration name="TestFLOPs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Coding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Fashion" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Fashion/Generate10.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Generate100" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Coding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/MNIST" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/MNIST/Generate100.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/TestFLOPs.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -173,58 +135,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train_8input_fashion" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Coding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Fashion" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Fashion/train_8input_fashion.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="train_CIFAR" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="model_BW_Simple_CNN_FC" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Coding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/CIFAR" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Model" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/CIFAR/train_CIFAR.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="train_mnist" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Coding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/MNIST" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/MNIST/train_mnist.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_CNN_FC.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -233,21 +154,101 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="model_BW_Simple_OTF_FC" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Coding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_OTF_FC.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_BW_QuickDraw" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Coding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/QucikDraw" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_QuickDraw.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_BW_Simple_Test3_QuickDraw" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Coding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/QucikDraw" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/QucikDraw/train_BW_Simple_Test3_QuickDraw.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_RGB_CIFAR" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Coding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/CIFAR" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/CIFAR/train_RGB_CIFAR.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.train_RGB_CIFAR" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.train_mnist" />
-      <item itemvalue="Python.train_CIFAR" />
-      <item itemvalue="Python.Generate10" />
-      <item itemvalue="Python.Generate100" />
-      <item itemvalue="Python.train_8input_fashion" />
+      <item itemvalue="Python.model_BW_Simple_CNN_FC" />
+      <item itemvalue="Python.model_BW_Simple_OTF_FC" />
+      <item itemvalue="Python.train_BW_QuickDraw" />
+      <item itemvalue="Python.train_BW_Simple_Test3_QuickDraw" />
+      <item itemvalue="Python.TestFLOPs" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.train_CIFAR" />
-        <item itemvalue="Python.train_mnist" />
-        <item itemvalue="Python.Generate100" />
-        <item itemvalue="Python.Generate10" />
-        <item itemvalue="Python.train_8input_fashion" />
+        <item itemvalue="Python.train_BW_Simple_Test3_QuickDraw" />
+        <item itemvalue="Python.model_BW_Simple_CNN_FC" />
+        <item itemvalue="Python.train_BW_QuickDraw" />
+        <item itemvalue="Python.TestFLOPs" />
+        <item itemvalue="Python.model_BW_Simple_OTF_FC" />
       </list>
     </recent_temporary>
   </component>
@@ -275,6 +276,22 @@
       <workItem from="1686574665587" duration="47570000" />
       <workItem from="1686763009014" duration="1254000" />
       <workItem from="1686918813113" duration="5637000" />
+      <workItem from="1687123730449" duration="2462000" />
+      <workItem from="1687179195047" duration="950000" />
+      <workItem from="1687180790853" duration="14422000" />
+      <workItem from="1687263018186" duration="23646000" />
+      <workItem from="1687349442136" duration="6471000" />
+      <workItem from="1688408928161" duration="9000" />
+      <workItem from="1688497587020" duration="1275000" />
+      <workItem from="1688846554984" duration="2220000" />
+      <workItem from="1689003506769" duration="52559000" />
+      <workItem from="1689137549043" duration="8048000" />
+      <workItem from="1689220532054" duration="34000" />
+      <workItem from="1689531289613" duration="2769000" />
+      <workItem from="1689617369945" duration="26938000" />
+      <workItem from="1689778610286" duration="993000" />
+      <workItem from="1689817895263" duration="500000" />
+      <workItem from="1690251244045" duration="15375000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1685109392811</created>
@@ -308,19 +325,43 @@
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Coding$train_BW_ONN_QuickDraw.coverage" NAME="train_BW_ONN_QuickDraw Coverage Results" MODIFIED="1689145334458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/QucikDraw" />
     <SUITE FILE_PATH="coverage/Coding$TestTime.coverage" NAME="TestTime Coverage Results" MODIFIED="1686704203652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$GenerateDataset.coverage" NAME="GenerateDataset Coverage Results" MODIFIED="1689534619098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/FCS" />
+    <SUITE FILE_PATH="coverage/Coding$train_ONN_fashion.coverage" NAME="train_ONN_fashion Coverage Results" MODIFIED="1687349793909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_BW_Cut_QuickDraw.coverage" NAME="train_BW_Cut_QuickDraw Coverage Results" MODIFIED="1689132382932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/QucikDraw" />
     <SUITE FILE_PATH="coverage/Coding$train_mnist.coverage" NAME="train_mnist Coverage Results" MODIFIED="1686085467148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
-    <SUITE FILE_PATH="coverage/Coding$train_fashion.coverage" NAME="train_fashion Coverage Results" MODIFIED="1686747992430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_fashion.coverage" NAME="train_BW_fashion Coverage Results" MODIFIED="1689046267939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
     <SUITE FILE_PATH="coverage/Coding$train_8input.coverage" NAME="train_8input Coverage Results" MODIFIED="1685659442449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
-    <SUITE FILE_PATH="coverage/Coding$train.coverage" NAME="train_mnist Coverage Results" MODIFIED="1685716609901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$Generate100.coverage" NAME="Generate100 Coverage Results" MODIFIED="1686103555373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/MNIST" />
     <SUITE FILE_PATH="coverage/Coding$train_8input_mnist.coverage" NAME="train_8input_mnist Coverage Results" MODIFIED="1686599540574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$LoadingMat.coverage" NAME="LoadingMat Coverage Results" MODIFIED="1685501031628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
-    <SUITE FILE_PATH="coverage/Coding$train_8input_fashion.coverage" NAME="train_8input_fashion Coverage Results" MODIFIED="1686750929587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
-    <SUITE FILE_PATH="coverage/Coding$train_CIFAR.coverage" NAME="train_CIFAR Coverage Results" MODIFIED="1686922537411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/CIFAR" />
-    <SUITE FILE_PATH="coverage/Coding$TestFLOPs.coverage" NAME="TestFLOPs Coverage Results" MODIFIED="1686708343488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
+    <SUITE FILE_PATH="coverage/Coding$train_ONN_mnist.coverage" NAME="train_ONN_mnist Coverage Results" MODIFIED="1687182854216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/MNIST" />
     <SUITE FILE_PATH="coverage/Coding$model.coverage" NAME="model Coverage Results" MODIFIED="1684596754998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
+    <SUITE FILE_PATH="coverage/Coding$train_RGB_OTF_CIFAR.coverage" NAME="train_RGB_OTF_CIFAR Coverage Results" MODIFIED="1689093555269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/CIFAR" />
+    <SUITE FILE_PATH="coverage/Coding$train.coverage" NAME="train_mnist Coverage Results" MODIFIED="1685716609901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
+    <SUITE FILE_PATH="coverage/Coding$train_QuickDraw.coverage" NAME="train_QuickDraw Coverage Results" MODIFIED="1687354461202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/QucikDraw" />
+    <SUITE FILE_PATH="coverage/Coding$train_8_ONN_fashion.coverage" NAME="train_8_ONN_fashion Coverage Results" MODIFIED="1687349571559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_RGB_OTF_Test2_CIFAR.coverage" NAME="train_RGB_OTF_Test2_CIFAR Coverage Results" MODIFIED="1689709471965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/CIFAR" />
+    <SUITE FILE_PATH="coverage/Coding$train_cut_fashion.coverage" NAME="train_cut_fashion Coverage Results" MODIFIED="1687351838138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_BW_OTF_Test1_QuickDraw.coverage" NAME="train_BW_OTF_Test1_QuickDraw Coverage Results" MODIFIED="1689731946920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/QucikDraw" />
+    <SUITE FILE_PATH="coverage/Coding$train_8input_fashion.coverage" NAME="train_8input_fashion Coverage Results" MODIFIED="1686750929587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_BW_fashion.coverage" NAME="train_BW_fashion Coverage Results" MODIFIED="1689121205278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Fashion" />
+    <SUITE FILE_PATH="coverage/Coding$train_CIFAR.coverage" NAME="train_RGB_CIFAR Coverage Results" MODIFIED="1689133002294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/CIFAR" />
+    <SUITE FILE_PATH="coverage/Coding$convertImg.coverage" NAME="GenerateDataset Coverage Results" MODIFIED="1687310636740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/QucikDraw" />
+    <SUITE FILE_PATH="coverage/Coding$TestFLOPs.coverage" NAME="TestFLOPs Coverage Results" MODIFIED="1690323404178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$model_8input.coverage" NAME="model_8input Coverage Results" MODIFIED="1685504762159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
   </component>
 </project>
