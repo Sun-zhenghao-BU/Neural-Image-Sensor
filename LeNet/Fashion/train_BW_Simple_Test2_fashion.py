@@ -9,16 +9,16 @@ import time
 import h5py
 import sys
 sys.path.append("../Model")
-from model_BW_Simple_CNN_FC import LeNet
+from model_BW_Simple_FC import LeNet
 
-# Load the dataset
-trainData = h5py.File("../OTFData/QuickDraw/RawTrainSet.mat")
-testData = h5py.File("../OTFData/QuickDraw/RawTestSet.mat")
-trainLabels = h5py.File("../OTFData/QuickDraw/TrainLabels.mat")
-testLabels = h5py.File("../OTFData/QuickDraw/TestLabels.mat")
+# Loading .mat file
+trainData = h5py.File('../OTFData/Fashion/FashionOriginalTrainSet.mat', 'r')
+testData = h5py.File('../OTFData/Fashion/FashionOriginalTestSet.mat', 'r')
+trainLabels = h5py.File('../OTFData/Fashion/FashionTrainLabels.mat', 'r')
+testLabels = h5py.File('../OTFData/Fashion/FashionTestLabels.mat', 'r')
 
-TrainSet = trainData['TrainData'][:]
-TestSet = testData['TestData'][:]
+TrainSet = trainData['TrainImages'][:]
+TestSet = testData['TestImages'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
 TestLabels = testLabels['TestLabels'][:]
 
@@ -44,15 +44,14 @@ else:
     Runs = 5
 
 train_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TrainLabels.squeeze())),
+    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),
     batch_size=Batch_size,
     shuffle=True)
 
 test_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TestSet.reshape(-1, 1, 28, 28)), torch.from_numpy(TestLabels.squeeze())),
+    torch.utils.data.TensorDataset(torch.from_numpy(TestSet), torch.from_numpy(TestLabels.squeeze())),
     batch_size=1,
     shuffle=True)
-
 
 # Train the model
 for run in range(Runs):

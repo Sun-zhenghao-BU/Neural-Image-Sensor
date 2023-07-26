@@ -11,14 +11,14 @@ import sys
 sys.path.append("../Model")
 from model_BW_Simple_CNN_FC import LeNet
 
-# Load the dataset
-trainData = h5py.File("../OTFData/QuickDraw/RawTrainSet.mat")
-testData = h5py.File("../OTFData/QuickDraw/RawTestSet.mat")
-trainLabels = h5py.File("../OTFData/QuickDraw/TrainLabels.mat")
-testLabels = h5py.File("../OTFData/QuickDraw/TestLabels.mat")
+# Loading .mat file
+trainData = h5py.File('../OTFData/Fashion/FashionOriginalTrainSet.mat', 'r')
+testData = h5py.File('../OTFData/Fashion/FashionOriginalTestSet.mat', 'r')
+trainLabels = h5py.File('../OTFData/Fashion/FashionTrainLabels.mat', 'r')
+testLabels = h5py.File('../OTFData/Fashion/FashionTestLabels.mat', 'r')
 
-TrainSet = trainData['TrainData'][:]
-TestSet = testData['TestData'][:]
+TrainSet = trainData['TrainImages'][:]
+TestSet = testData['TestImages'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
 TestLabels = testLabels['TestLabels'][:]
 

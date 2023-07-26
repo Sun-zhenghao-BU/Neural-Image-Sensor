@@ -4,7 +4,7 @@ from thop import profile
 import sys
 
 sys.path.append("../Model")
-from model_BW_Simple_CNN_FC import LeNet
+from model_BW_Simple_CNN_CNN_2 import LeNet
 
 # Define the model
 model = LeNet()
