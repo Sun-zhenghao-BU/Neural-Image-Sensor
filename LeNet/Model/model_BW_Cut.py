@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as func
-
+from torch.autograd import profiler
 
 class LeNet(nn.Module):
 
@@ -39,3 +39,17 @@ class LeNet(nn.Module):
         x = func.log_softmax(x, dim=1)
 
         return x
+
+model = LeNet()
+
+# define the input data
+input_data = torch.randn(1, 1, 28, 28)  # Input data demo
+
+
+with profiler.profile(record_shapes=True, profile_memory=True) as prof:
+    with profiler.record_function("model_inference"):
+        # Forward Propagation
+        output = model(input_data)
+
+# Print the result of model performance
+print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=None))
