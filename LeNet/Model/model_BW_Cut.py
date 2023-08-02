@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as func
 from torch.autograd import profiler
 
+
 class LeNet(nn.Module):
 
     def __init__(self):
@@ -46,10 +47,23 @@ model = LeNet()
 input_data = torch.randn(1, 1, 28, 28)  # Input data demo
 
 
-with profiler.profile(record_shapes=True, profile_memory=True) as prof:
-    with profiler.record_function("model_inference"):
+if torch.cuda.is_available():
+    model = model.to("cuda")
+    input_data = input_data.to("cuda")
+
+    with profiler.profile(use_cuda=True, record_shapes=True) as prof:
         # Forward Propagation
         output = model(input_data)
 
-# Print the result of model performance
-print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=None))
+    # Print the result of GPU performance
+    print("GPU Time:")
+    print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=None))
+else:
+
+    with profiler.profile(use_cuda=False, record_shapes=True) as prof:
+        # Forward Propagation
+        output = model(input_data)
+
+    # Print the result of CPU performance
+    print("CPU Time:")
+    print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=None))
