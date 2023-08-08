@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c786e6bc-e2d5-48af-aca6-4db818760f17" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_Cut.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Cut.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_ONN.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_ONN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_OTF.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_OTF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_OTF_ONN.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_OTF_ONN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_CNN_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_CNN_FC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_FC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_OTF_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Simple_OTF_FC.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -316,6 +308,7 @@
       <workItem from="1690950727234" duration="386000" />
       <workItem from="1690951172054" duration="4885000" />
       <workItem from="1690988384430" duration="12000" />
+      <workItem from="1690989671186" duration="646000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1685109392811</created>

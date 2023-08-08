@@ -68,3 +68,4 @@ with profiler.profile(activities=[
 # Print the result of GPU performance
 print("Time:")
 print(prof.key_averages().table(sort_by="self_cuda_time_total", row_limit=None))
+print("abcd")
