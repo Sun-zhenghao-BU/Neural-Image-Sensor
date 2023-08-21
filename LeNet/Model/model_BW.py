@@ -53,75 +53,75 @@ class LeNet(nn.Module):
 
 model = LeNet()
 
-# define the input data
-file = h5py.File('../OTFData/Fashion/FashionOriginalTestSet.mat', 'r')
-
-# Access the dataset
-dataset = file['TestImages'][:]
-
-# Get the first image
-image = dataset[0]
-
-# Convert the image to a PyTorch tensor
-input_data = torch.from_numpy(image)
-
-# Add an extra dimension for the batch size and an extra dimension for the channel
-input_data = input_data.unsqueeze(0).unsqueeze(0)
-input_data = input_data.type(torch.float32)
-
-if torch.cuda.is_available():
-    model = model.to("cuda")
-    input_data = input_data.to("cuda")
-    print("CUDA")
-else:
-    print("CPU")
-
-num_iterations = 10000  # The number of times to run the model
-
-with profiler.profile(activities=[
-    torch.profiler.ProfilerActivity.CPU,
-    torch.profiler.ProfilerActivity.CUDA,
-]) as prof:
-    for _ in range(num_iterations):
-        # Forward Propagation
-        output = model(input_data)
-
-
-# # Print the result of GPU performance
-# print("Averaged Time:")
-# averaged_stats = prof.key_averages()
+# # define the input data
+# file = h5py.File('../OTFData/Fashion/FashionOriginalTestSet.mat', 'r')
 #
-# # Define the columns for the pandas dataframe
-# columns = ["Name", "CPU time total avg", "Self CPU time total avg", "CUDA time total avg", "Self CUDA time total avg"]
+# # Access the dataset
+# dataset = file['TestImages'][:]
 #
-# # Create a list of lists that will be used to create the dataframe
-# data = []
-# for stat in averaged_stats:
-#     row = [
-#         stat.key,
-#         stat.cpu_time_total / num_iterations,
-#         stat.self_cpu_time_total / num_iterations,
-#         stat.cuda_time_total / num_iterations,
-#         stat.self_cuda_time_total / num_iterations
-#     ]
-#     data.append(row)
+# # Get the first image
+# image = dataset[0]
 #
-# # Create the dataframe
-# df = pd.DataFrame(data, columns=columns)
+# # Convert the image to a PyTorch tensor
+# input_data = torch.from_numpy(image)
 #
-# # Print the dataframe
-# print(df)
-
-# Print the result of GPU performance
-print("Time:")
-print(prof.key_averages().table(sort_by="self_cpu_time_total", row_limit=None))
-
-
+# # Add an extra dimension for the batch size and an extra dimension for the channel
+# input_data = input_data.unsqueeze(0).unsqueeze(0)
+# input_data = input_data.type(torch.float32)
+#
+# if torch.cuda.is_available():
+#     model = model.to("cuda")
+#     input_data = input_data.to("cuda")
+#     print("CUDA")
 # else:
-#     with profiler.profile(use_cuda=False, record_shapes=True) as prof:
+#     print("CPU")
+#
+# num_iterations = 10000  # The number of times to run the model
+#
+# with profiler.profile(activities=[
+#     torch.profiler.ProfilerActivity.CPU,
+#     torch.profiler.ProfilerActivity.CUDA,
+# ]) as prof:
+#     for _ in range(num_iterations):
 #         # Forward Propagation
 #         output = model(input_data)
 #
-#     # Print the result of CPU performance
-#     print("CPU Time:")
-#     print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=None))
+#
+# # # Print the result of GPU performance
+# # print("Averaged Time:")
+# # averaged_stats = prof.key_averages()
+# #
+# # # Define the columns for the pandas dataframe
+# # columns = ["Name", "CPU time total avg", "Self CPU time total avg", "CUDA time total avg", "Self CUDA time total avg"]
+# #
+# # # Create a list of lists that will be used to create the dataframe
+# # data = []
+# # for stat in averaged_stats:
+# #     row = [
+# #         stat.key,
+# #         stat.cpu_time_total / num_iterations,
+# #         stat.self_cpu_time_total / num_iterations,
+# #         stat.cuda_time_total / num_iterations,
+# #         stat.self_cuda_time_total / num_iterations
+# #     ]
+# #     data.append(row)
+# #
+# # # Create the dataframe
+# # df = pd.DataFrame(data, columns=columns)
+# #
+# # # Print the dataframe
+# # print(df)
+#
+# # Print the result of GPU performance
+# print("Time:")
+# print(prof.key_averages().table(sort_by="self_cpu_time_total", row_limit=None))
+#
+#
+# # else:
+# #     with profiler.profile(use_cuda=False, record_shapes=True) as prof:
+# #         # Forward Propagation
+# #         output = model(input_data)
+# #
+# #     # Print the result of CPU performance
+# #     print("CPU Time:")
+# #     print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=None))
