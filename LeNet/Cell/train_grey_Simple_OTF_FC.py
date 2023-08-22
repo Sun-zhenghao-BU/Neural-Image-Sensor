@@ -10,16 +10,16 @@ import h5py
 import sys
 
 sys.path.append("../Model")
-from model_grey_Simple_CNN_FC import LeNet
+from model_grey_Simple_OTF_FC import LeNet
 
 # Load the dataset
-trainData = h5py.File("../OTFData/Cell/RawTrainSet.mat")
-testData = h5py.File("../OTFData/Cell/RawTestSet.mat")
+trainData = h5py.File("../OTFData/Cell/TrainSet.mat")
+testData = h5py.File("../OTFData/Cell/TestSet.mat")
 trainLabels = h5py.File("../OTFData/Cell/TrainLabels.mat")
 testLabels = h5py.File("../OTFData/Cell/TestLabels.mat")
 
-TrainSet = trainData['TrainData'][:]
-TestSet = testData['TestData'][:]
+TrainSet = trainData['TrainSet'][:]
+TestSet = testData['TestSet'][:]
 TrainLabels = trainLabels['TrainLabels'][:]
 TestLabels = testLabels['TestLabels'][:]
 
@@ -35,7 +35,7 @@ test_time_runs = []
 
 Batch_size = 64
 Epoch = 15
-Runs = 1
+Runs = 5
 Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if Device.type == 'cuda':
     print("Using CUDA for computation")
@@ -44,12 +44,12 @@ else:
 
 # Note that TrainSet and TestSet will need to be reshaped again before being used in the DataLoader.
 train_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet.reshape(-1, 1, 100, 100)), torch.from_numpy(TrainLabels.squeeze())),
-    batch_size=64,
+    torch.utils.data.TensorDataset(torch.from_numpy(TrainSet), torch.from_numpy(TrainLabels.squeeze())),
+    batch_size=Batch_size,
     shuffle=True)
 
 test_loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(torch.from_numpy(TestSet.reshape(-1, 1, 100, 100)), torch.from_numpy(TestLabels.squeeze())),
+    torch.utils.data.TensorDataset(torch.from_numpy(TestSet), torch.from_numpy(TestLabels.squeeze())),
     batch_size=1,
     shuffle=True)
 

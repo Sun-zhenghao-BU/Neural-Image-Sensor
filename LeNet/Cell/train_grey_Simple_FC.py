@@ -1,23 +1,27 @@
+from torch.utils.data import DataLoader, Dataset
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torch.nn as nn
 import pandas as pd
-from torch.utils.data import DataLoader
 import torch.optim as optim
 import time
+import h5py
 import sys
+
 sys.path.append("../Model")
 from model_grey_Simple_FC import LeNet
 
-# Load the npz file
-data = np.load('../data/Cell/EBI_Cells.npz')
+# Load the dataset
+trainData = h5py.File("../OTFData/Cell/RawTrainSet.mat")
+testData = h5py.File("../OTFData/Cell/RawTestSet.mat")
+trainLabels = h5py.File("../OTFData/Cell/TrainLabels.mat")
+testLabels = h5py.File("../OTFData/Cell/TestLabels.mat")
 
-# Extract required datasets
-TrainSet = data['train_data_grey'].reshape(-1, 100, 100)
-TrainLabels = data['train_labels']
-TestSet = data['test_data_grey'].reshape(-1, 100, 100)
-TestLabels = data['test_labels']
+TrainSet = trainData['TrainData'][:]
+TestSet = testData['TestData'][:]
+TrainLabels = trainLabels['TrainLabels'][:]
+TestLabels = testLabels['TestLabels'][:]
 
 print("TrainSet shape:", TrainSet.shape)
 print("TrainLabels shape:", TrainLabels.shape)

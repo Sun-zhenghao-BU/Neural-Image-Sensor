@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c786e6bc-e2d5-48af-aca6-4db818760f17" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Cell.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_CNN_FC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_FC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Fashion/train_BW_Compare_CNN_FC_fashion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Fashion/train_BW_Compare_FC_FC_fashion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Fashion/train_BW_Compare_OTF_FC_fashion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/MNIST/train_BW_Compare_CNN_FC_mnist.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/MNIST/train_BW_Compare_FC_FC_mnist.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/MNIST/train_BW_Compare_OTF_FC_mnist.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Compare_CNN_FC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Compare_FC_FC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_BW_Compare_OTF_FC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_grey_Cell.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_grey_Simple_CNN_FC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_grey_Simple_FC.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LeNet/Cell/ConvertMat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_OTF_FC.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_grey_Simple_OTF_FC.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/FCS/GenerateDataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Cell/GenerateDataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_BW.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_BW.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeNet/TestFLOPs.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/TestFLOPs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_CNN_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_CNN_FC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_FC.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,15 +63,15 @@
       <recent name="$PROJECT_DIR$/LeNet/QucikDraw" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LeNet/OTFData/Cell" />
       <recent name="$PROJECT_DIR$/LeNet/data/data" />
       <recent name="$PROJECT_DIR$/LeNet/data/data/Dataset" />
       <recent name="$PROJECT_DIR$/LeNet/Model" />
       <recent name="$PROJECT_DIR$/LeNet/data" />
-      <recent name="$PROJECT_DIR$/LeNet" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.TestFLOPs">
-    <configuration name="TestFLOPs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.train_grey_Simple_OTF_FC">
+    <configuration name="ConvertMat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Coding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -92,14 +79,33 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/QucikDraw" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/TestFLOPs.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/QucikDraw/ConvertMat.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ConvertMat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Coding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Cell" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Cell/ConvertMat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -144,28 +150,6 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="train_BW_Compare_CNN_FC_mnist" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Coding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/MNIST" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/MNIST/train_BW_Compare_CNN_FC_mnist.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -260,22 +244,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train_grey_Simple_OTF_FC" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Coding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Cell" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_OTF_FC.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.train_RGB_CIFAR" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.TestFLOPs" />
-      <item itemvalue="Python.train_BW_Compare_CNN_FC_mnist" />
+      <item itemvalue="Python.ConvertMat" />
+      <item itemvalue="Python.train_grey_Simple_OTF_FC" />
       <item itemvalue="Python.train_grey_Cell" />
       <item itemvalue="Python.train_grey_Simple_CNN_FC" />
       <item itemvalue="Python.train_grey_Simple_FC" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.TestFLOPs" />
-        <item itemvalue="Python.train_BW_Compare_CNN_FC_mnist" />
-        <item itemvalue="Python.train_grey_Cell" />
-        <item itemvalue="Python.train_grey_Simple_CNN_FC" />
+        <item itemvalue="Python.train_grey_Simple_OTF_FC" />
         <item itemvalue="Python.train_grey_Simple_FC" />
+        <item itemvalue="Python.train_grey_Simple_CNN_FC" />
+        <item itemvalue="Python.ConvertMat" />
+        <item itemvalue="Python.ConvertMat" />
       </list>
     </recent_temporary>
   </component>
@@ -333,7 +336,8 @@
       <workItem from="1692127236131" duration="9260000" />
       <workItem from="1692155351052" duration="9698000" />
       <workItem from="1692191463296" duration="1494000" />
-      <workItem from="1692648981896" duration="1813000" />
+      <workItem from="1692648981896" duration="4772000" />
+      <workItem from="1692657802686" duration="1127000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1685109392811</created>
@@ -391,7 +395,9 @@
     <SUITE FILE_PATH="coverage/Coding$train_8input_mnist.coverage" NAME="train_8input_mnist Coverage Results" MODIFIED="1686599540574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$LoadingMat.coverage" NAME="LoadingMat Coverage Results" MODIFIED="1685501031628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$train_ONN_mnist.coverage" NAME="train_ONN_mnist Coverage Results" MODIFIED="1687182854216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/MNIST" />
+    <SUITE FILE_PATH="coverage/Coding$train_grey_Simple_FC.coverage" NAME="train_grey_Simple_FC Coverage Results" MODIFIED="1692657319341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Cell" />
     <SUITE FILE_PATH="coverage/Coding$model.coverage" NAME="model Coverage Results" MODIFIED="1684596754998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
+    <SUITE FILE_PATH="coverage/Coding$ConvertMat.coverage" NAME="ConvertMat Coverage Results" MODIFIED="1692653757361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/Cell" />
     <SUITE FILE_PATH="coverage/Coding$train_RGB_OTF_CIFAR.coverage" NAME="train_RGB_OTF_CIFAR Coverage Results" MODIFIED="1689093555269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/CIFAR" />
     <SUITE FILE_PATH="coverage/Coding$train.coverage" NAME="train_mnist Coverage Results" MODIFIED="1685716609901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet" />
     <SUITE FILE_PATH="coverage/Coding$train_QuickDraw.coverage" NAME="train_QuickDraw Coverage Results" MODIFIED="1687354461202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LeNet/QucikDraw" />
