@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c786e6bc-e2d5-48af-aca6-4db818760f17" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/LeNet/Cell/ConvertMat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_OTF_FC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeNet/Model/model_grey_Simple_OTF_FC.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_CNN_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_CNN_FC.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_FC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_OTF_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Cell/train_grey_Simple_OTF_FC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/Model/model_grey_Simple_FC.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/Model/model_grey_Simple_FC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeNet/TestFLOPs.py" beforeDir="false" afterPath="$PROJECT_DIR$/LeNet/TestFLOPs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +70,7 @@
       <recent name="$PROJECT_DIR$/LeNet/data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.train_grey_Simple_OTF_FC">
+  <component name="RunManager" selected="Python.TestFLOPs">
     <configuration name="ConvertMat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Coding" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -106,6 +106,25 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Cell/ConvertMat.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestFLOPs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Coding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/TestFLOPs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -178,28 +197,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train_grey_Cell" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Coding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Cell" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeNet/Cell/train_grey_Cell.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="train_grey_Simple_CNN_FC" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Coding" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -226,9 +223,6 @@
       <module name="Coding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LeNet/Cell" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -266,18 +260,18 @@
     <list>
       <item itemvalue="Python.train_RGB_CIFAR" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.TestFLOPs" />
       <item itemvalue="Python.ConvertMat" />
       <item itemvalue="Python.train_grey_Simple_OTF_FC" />
-      <item itemvalue="Python.train_grey_Cell" />
       <item itemvalue="Python.train_grey_Simple_CNN_FC" />
       <item itemvalue="Python.train_grey_Simple_FC" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.train_grey_Simple_OTF_FC" />
+        <item itemvalue="Python.TestFLOPs" />
         <item itemvalue="Python.train_grey_Simple_FC" />
+        <item itemvalue="Python.train_grey_Simple_OTF_FC" />
         <item itemvalue="Python.train_grey_Simple_CNN_FC" />
-        <item itemvalue="Python.ConvertMat" />
         <item itemvalue="Python.ConvertMat" />
       </list>
     </recent_temporary>
@@ -337,7 +331,7 @@
       <workItem from="1692155351052" duration="9698000" />
       <workItem from="1692191463296" duration="1494000" />
       <workItem from="1692648981896" duration="4772000" />
-      <workItem from="1692657802686" duration="1127000" />
+      <workItem from="1692657802686" duration="6413000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1685109392811</created>
